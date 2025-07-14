@@ -42,7 +42,7 @@ try {
     }
 
 // Inserindo o novo usuário
-    $sql = 'INSERT INTO usuarios ($nome, email, senha ) VALUES (:nome, :email, :senha)';
+    $sql = 'INSERT INTO usuarios (nome, email, senha ) VALUES (:nome, :email, :senha)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         ':nome' => $nome,
