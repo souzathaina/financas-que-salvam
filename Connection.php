@@ -1,8 +1,8 @@
 <?php
 
 $host = 'localhost'; // host
-$dbname = ''; // nome do banco
-$username = ''; // usuario
+$dbname = 'financas_que_salvam'; // nome do banco
+$username = 'root'; // usuario
 $password = '';  // senha
 
 try {

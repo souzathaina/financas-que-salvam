@@ -36,3 +36,6 @@ try {
     header("Location: /"+/*pagina de login?*/+".php?sucesso=0&erro=erro_interno");
     exit();
 }
+
+
+// alterar os valores de destino dos headers!!!!
