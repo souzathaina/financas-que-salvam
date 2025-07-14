@@ -3,6 +3,7 @@ session_start();
 include './Connection.php';
 
 // Valores recebidos do form
+$nome = $_POST['nome'] ?? '';
 $email = $_POST['email'] ?? '';
 $senha = $_POST['senha'] ?? '';
 $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT); //senha com hash
@@ -41,9 +42,10 @@ try {
     }
 
 // Inserindo o novo usuário
-    $sql = 'INSERT INTO usuarios (email, senha) VALUES (:email, :senha)';
+    $sql = 'INSERT INTO usuarios ($nome, email, senha ) VALUES (:nome, :email, :senha)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
+        ':nome' => $nome,
         ':email' => $email,
         ':senha' => $senhaCriptografada
     ]);
@@ -59,3 +61,6 @@ try {
     header("Location: /" . "pagina de cadastro?" . ".php?sucesso=0&erro=erro_interno");
     exit();
 }
+
+
+// alterar os valores de destino dos headers!!!
