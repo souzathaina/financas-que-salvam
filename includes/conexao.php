@@ -2,7 +2,7 @@
 // conexao.php
 
 $host = 'localhost';
-$dbname = 'dbnoticias'; // Nome do banco de dados
+$dbname = 'financas_que_salvam'; // Nome do banco de dados
 $usuario = 'root';
 $senha = '';
 

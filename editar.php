@@ -10,26 +10,39 @@ if (!usuarioLogado()) {
 }
 
 $usuarioId = $_SESSION['id']; // ID do usuário logado
-$itemId = $_GET['id'] ?? null; // ID do item a ser editado, vindo da URL
+$despesaId = $_GET['id'] ?? null; // ID da despesa a ser editada, vindo da URL
 
-// Verifica se o ID do item foi fornecido
-if (!$itemId) {
-    echo "ID do item não especificado.";
+// Verifica se o ID da despesa foi fornecido
+if (!$despesaId) {
+    echo "ID da despesa não especificado.";
     exit;
 }
 
-// 1. Busca os dados atuais do item no banco de dados
-// Assumindo a tabela 'itens' com colunas 'id', 'usuario_id', 'descricao', 'valor', 'data_compra'
-$sql = "SELECT id, descricao, valor, data_compra FROM itens WHERE id = :item_id AND usuario_id = :usuario_id";
+// 1. Busca os dados atuais da despesa no banco de dados
+// Selecionamos todos os campos que podem ser editados, mais o ID do usuário para segurança.
+$sql = "SELECT id, categoria_id, valor, data, descricao FROM despesas WHERE id = :despesa_id AND usuario_id = :usuario_id";
 $stmt = $pdo->prepare($sql);
-$stmt->execute(['item_id' => $itemId, 'usuario_id' => $usuarioId]);
-$item = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt->execute(['despesa_id' => $despesaId, 'usuario_id' => $usuarioId]);
+$despesa = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Verifica se o item existe e pertence ao usuário logado
-if (!$item) {
-    echo "Item não encontrado ou você não tem permissão para editá-lo.";
+// Verifica se a despesa existe e pertence ao usuário logado
+if (!$despesa) {
+    echo "Despesa não encontrada ou você não tem permissão para editá-la.";
     exit;
 }
+
+// Além disso, precisamos carregar as categorias para o dropdown (SELECT)
+$categorias = [];
+try {
+    $sqlCategorias = "SELECT id, nome FROM categorias ORDER BY nome";
+    $stmtCategorias = $pdo->query($sqlCategorias);
+    $categorias = $stmtCategorias->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Tratar erro se as categorias não puderem ser carregadas
+    // Isso não deve impedir a edição da despesa, mas o dropdown pode ficar vazio
+    $erro = "Erro ao carregar categorias: " . $e->getMessage();
+}
+
 
 $mensagem = '';
 $erro = '';
@@ -37,32 +50,35 @@ $erro = '';
 // 2. Processa o formulário quando ele é enviado (dados novos para salvar)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pega os dados do formulário
-    $novaDescricao = trim($_POST['descricao']);
+    $novaCategoriaId = filter_input(INPUT_POST, 'categoria_id', FILTER_VALIDATE_INT);
     $novoValor = filter_input(INPUT_POST, 'valor', FILTER_VALIDATE_FLOAT);
-    $novaDataCompra = trim($_POST['data_compra']);
+    $novaData = trim($_POST['data']);
+    $novaDescricao = trim($_POST['descricao']);
 
     // Validação básica dos dados
-    if (empty($novaDescricao) || $novoValor === false || empty($novaDataCompra)) {
-        $erro = "Todos os campos são obrigatórios e o valor deve ser um número.";
+    if ($novaCategoriaId === false || empty($novaCategoriaId) || $novoValor === false || empty($novaData) || empty($novaDescricao)) {
+        $erro = "Todos os campos são obrigatórios e o valor/categoria deve ser válido.";
     } else {
         // Prepara e executa a query de atualização
-        $updateSql = "UPDATE itens SET descricao = :descricao, valor = :valor, data_compra = :data_compra WHERE id = :item_id AND usuario_id = :usuario_id";
+        $updateSql = "UPDATE despesas SET categoria_id = :categoria_id, valor = :valor, data = :data, descricao = :descricao WHERE id = :despesa_id AND usuario_id = :usuario_id";
         $updateStmt = $pdo->prepare($updateSql);
 
         try {
             $updateStmt->execute([
-                'descricao' => $novaDescricao,
+                'categoria_id' => $novaCategoriaId,
                 'valor' => $novoValor,
-                'data_compra' => $novaDataCompra,
-                'item_id' => $itemId,
+                'data' => $novaData,
+                'descricao' => $novaDescricao,
+                'despesa_id' => $despesaId,
                 'usuario_id' => $usuarioId
             ]);
-            $mensagem = "Item atualizado com sucesso!";
+            $mensagem = "Despesa atualizada com sucesso!";
 
-            // Atualiza a variável $item para que os novos dados sejam exibidos no formulário
-            $item['descricao'] = $novaDescricao;
-            $item['valor'] = $novoValor;
-            $item['data_compra'] = $novaDataCompra;
+            // Atualiza a variável $despesa para que os novos dados sejam exibidos no formulário
+            $despesa['categoria_id'] = $novaCategoriaId;
+            $despesa['valor'] = $novoValor;
+            $despesa['data'] = $novaData;
+            $despesa['descricao'] = $novaDescricao;
 
         } catch (PDOException $e) {
             $erro = "Erro ao salvar as alterações: " . $e->getMessage();
@@ -76,10 +92,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Item</title>
+    <title>Editar Despesa</title>
 </head>
 <body>
-    <h1>Editar Item</h1>
+    <h1>Editar Despesa</h1>
 
     <?php if (!empty($erro)): ?>
         <p style="color: red;"><?= htmlspecialchars($erro) ?></p>
@@ -88,21 +104,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="post">
-        <label for="descricao">Descrição do Item:</label><br>
-        <input type="text" id="descricao" name="descricao" value="<?= htmlspecialchars($item['descricao']) ?>" required><br><br>
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="4" cols="50" required><?= htmlspecialchars($despesa['descricao'] ?? '') ?></textarea><br><br>
+
+        <label for="categoria_id">Categoria:</label><br>
+        <select id="categoria_id" name="categoria_id" required>
+            <?php foreach ($categorias as $categoria): ?>
+                <option value="<?= htmlspecialchars($categoria['id']) ?>"
+                    <?= ($categoria['id'] == $despesa['categoria_id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($categoria['nome']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
 
         <label for="valor">Valor:</label><br>
-        <input type="number" id="valor" name="valor" step="0.01" value="<?= htmlspecialchars($item['valor']) ?>" required><br><br>
+        <input type="number" id="valor" name="valor" step="0.01" value="<?= htmlspecialchars($despesa['valor'] ?? '') ?>" required><br><br>
 
-        <label for="data_compra">Data da Compra:</label><br>
-        <input type="date" id="data_compra" name="data_compra" value="<?= htmlspecialchars($item['data_compra']) ?>" required><br><br>
+        <label for="data">Data:</label><br>
+        <input type="date" id="data" name="data" value="<?= htmlspecialchars($despesa['data'] ?? '') ?>" required><br><br>
 
         <button type="submit">Salvar Alterações</button>
-        <a href="confirmar_exclusao_item.php?id=<?= htmlspecialchars($item['id']) ?>">Excluir Item</a>
+        <a href="confirmar_exclusao_despesa.php?id=<?= htmlspecialchars($despesa['id']) ?>">Excluir Despesa</a>
     </form>
 
     <br><br>
-    <a href="lista_itens.php">Voltar para a Lista de Itens</a> |
+    <a href="lista_despesas.php">Voltar para a Lista de Despesas</a> |
     <a href="logout.php">Sair</a>
 </body>
 </html>
