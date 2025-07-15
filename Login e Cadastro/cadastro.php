@@ -2,28 +2,32 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Cadastro</title>
   <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
   <div class="container">
     <div class="cadastro-box">
+      <a href="index.html" class="voltar">←</a>
+      <a href="index.html" class="voltar mobile">←</a>
+
       <h2>Cadastro</h2>
+
       <form>
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" placeholder="Campo de texto">
+        <input id="nome" type="text" placeholder="Digite seu nome" required>
 
         <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" placeholder="Campo de texto">
+        <input id="telefone" type="tel" placeholder="Digite seu telefone">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Campo de texto">
+        <input id="email" type="email" placeholder="Digite seu email" required>
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" placeholder="Campo de texto">
+        <input id="senha" type="password" placeholder="Crie uma senha" required>
 
-        <button type="submit">Cadastre-se</button>
+        <button type="submit">Cadastre‑se</button>
       </form>
     </div>
   </div>
