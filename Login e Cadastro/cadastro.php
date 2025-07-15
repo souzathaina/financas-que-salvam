@@ -18,9 +18,6 @@
         <label for="nome">Nome:</label>
         <input id="nome" type="text" placeholder="Digite seu nome" required>
 
-        <label for="telefone">Telefone:</label>
-        <input id="telefone" type="tel" placeholder="Digite seu telefone">
-
         <label for="email">Email:</label>
         <input id="email" type="email" placeholder="Digite seu email" required>
 

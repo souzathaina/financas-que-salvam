@@ -9,7 +9,6 @@
 <body>
   <div class="container">
     <div class="login-box">
-      <!-- Botão voltar -->
       <a href="index.html" class="voltar">←</a>
       <a href="index.html" class="voltar mobile">←</a>
 
