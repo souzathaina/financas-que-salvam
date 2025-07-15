@@ -1,5 +1,5 @@
 <?php
-$servidor = "Financas-que-salvam";  
+$servidor = "financas-que-salvam";  
 $usuario = "root";        
 $senha = "";              
 $banco = "financas";

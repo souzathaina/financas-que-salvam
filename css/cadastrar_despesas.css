@@ -1,0 +1,74 @@
+/* Cadastrar Despesas - Estilo específico */
+
+.centro {
+  justify-content: center;
+}
+
+.formulario-wrapper {
+  max-width: 600px;
+  width: 100%;
+}
+
+.titulo-cadastro {
+  text-align: center;
+  color: #1E90FF;
+  margin-bottom: 20px;
+}
+
+.formulario-despesa {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.campo-formulario {
+  margin-bottom: 20px;
+}
+
+.campo-formulario label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.campo-formulario input,
+.campo-formulario select,
+.campo-formulario textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  resize: none;
+}
+
+.btn-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn-container .btn-verde {
+  background-color: #2ecc71;
+  color: white;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.btn-container .btn-verde:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.btn-container .btn-verde:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.4);
+}
