@@ -19,7 +19,7 @@
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const chartData = {
-      labels: ['Eletrônicos', 'Roupas', 'Alimentos', 'Livros'],
+      labels: ['Contas', 'Investimentos', 'Alimentação', 'Lazer'],
       datasets: [{
         label: 'Vendas (%)',
         data: [30, 25, 20, 25],
