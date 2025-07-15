@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastrar Despesas</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/cadastrar_despesas.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container">
+      <h1>Finanças que Salvam</h1>
+      <div class="acoes-header">
+        <a href="index.html" class="link-entrar">Voltar</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="dashboard centro">
+    <main class="main-content formulario-wrapper">
+      <h1 class="titulo-cadastro">Cadastrar Nova Despesa</h1>
+
+      <form class="formulario-despesa">
+        <div class="campo-formulario">
+          <label for="valor">Valor (R$)</label>
+          <input type="number" id="valor" name="valor" placeholder="Ex: 75.50" required />
+        </div>
+
+        <div class="campo-formulario">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Educação">Educação</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="data">Data</label>
+          <input type="date" id="data" name="data" required />
+        </div>
+
+        <div class="campo-formulario">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" rows="3" placeholder="Descreva sua despesa..." required></textarea>
+        </div>
+
+        <div class="btn-container">
+          <button type="submit" class="btn-verde">Cadastrar Despesa</button>
+        </div>
+      </form>
+    </main>
+  </section>
+
+</body>
+</html>
