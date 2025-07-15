@@ -1,42 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #f0f4fa; /* tom neutro para combinar com azul */
-  font-family: Arial, sans-serif;
-  color: #1b1b1b; /* texto padrão */
+  background-color: #f0f4fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1b1b1b;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 16px;
 }
 
-/* Caixa do formulário de cadastro */
+/* Estilo da caixa de cadastro (igual à login-box) */
 .cadastro-box {
   position: relative;
-  background-color: #ffffff; /* fundo do header */
-  padding: 30px 40px;
-  border: 2px solid #3B82F6; /* borda com cor do título */
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  border: 1px solid #3B82F6;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
   text-align: center;
-  width: 340px;
-  max-width: 90vw;
-  color: #1b1b1b; /* texto dentro da box */
+  width: 100%;
+  max-width: 360px;
+  color: #1b1b1b;
+  transition: all 0.3s ease;
 }
 
 .cadastro-box h2 {
-  margin-bottom: 20px;
-  color: #3B82F6; /* cor do título */
+  margin-bottom: 25px;
+  color: #3B82F6;
+  font-size: 1.8rem;
+}
+
+.cadastro-box form {
+  width: 100%;
 }
 
 .cadastro-box label {
   display: block;
   text-align: left;
-  margin: 10px 0 5px;
-  color: #1b1b1b;
+  margin: 12px 0 6px;
+  font-weight: 500;
 }
 
 .cadastro-box input[type="text"],
@@ -44,59 +56,82 @@ body {
 .cadastro-box input[type="password"],
 .cadastro-box input[type="tel"] {
   width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background-color: #dbe3ec; /* tom mais suave para inputs */
+  padding: 12px;
+  border: 1px solid #ccd5e1;
+  border-radius: 8px;
+  background-color: #e6edf7;
   color: #1b1b1b;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+.cadastro-box input:focus {
+  border-color: #3B82F6;
+  outline: none;
 }
 
 .cadastro-box button {
+  width: 100%;
   background-color: #1E90FF;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .cadastro-box button:hover {
   background-color: #1C86EE;
 }
 
-/* Botão "Voltar" */
+.register-text {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.register-text a {
+  color: #3B82F6;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
 .voltar {
   position: absolute;
   left: 20px;
   top: 20px;
   text-decoration: none;
-  color: #1b1b1b;
-  font-size: 30px;
-  padding: 6px 12px;
-  transition: all 0.2s ease;
+  color: #1E90FF;
+  background-color: transparent;
+  font-size: 26px;
+  border-radius: 50%;
+  padding: 6px 10px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .voltar:hover {
-  color: #1E90FF;
+  background-color: #e6edf7;
+  color: #1C86EE;
 }
 
 .voltar.mobile {
   display: none;
-  font-size: 24px;
-  padding: 4px;
-  left: 12px;
-  top: 12px;
   position: absolute;
-  color: #1b1b1b;
+  left: 16px;
+  top: 16px;
+  font-size: 24px;
+  color: #1E90FF;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .cadastro-box {
-    padding: 25px 30px;
-    width: 300px;
+    padding: 32px;
   }
 
   h2 {
@@ -107,14 +142,14 @@ body {
   input,
   button,
   .register-text {
-    font-size: 0.98rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 600px) {
   .cadastro-box {
-    width: 85vw;
-    padding: 25px;
+    width: 90vw;
+    padding: 28px;
   }
 
   .voltar {
@@ -132,8 +167,7 @@ body {
 
 @media (max-width: 400px) {
   .cadastro-box {
-    width: 92vw;
-    padding: 20px;
+    padding: 24px;
   }
 
   h2 {
@@ -145,8 +179,8 @@ body {
   }
 
   button {
-    padding: 9px 18px;
-    font-size: 0.9rem;
+    padding: 10px;
+    font-size: 0.95rem;
   }
 
   .register-text {
@@ -160,7 +194,6 @@ body {
   }
 
   .container {
-    height: auto;
-    padding: 20px 0;
+    padding: 12px;
   }
 }
