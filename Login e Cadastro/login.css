@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #cce9ff;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background-color: #fff;
+  padding: 30px 40px;
+  border: 2px solid #8000ff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+}
+
+.login-box label {
+  display: block;
+  text-align: left;
+  margin: 10px 0 5px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #b3b3b3;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.login-box button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-box button:hover {
+  background-color: #0073e6;
+}
+
+.register-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-text a {
+  color: #0047ab;
+  text-decoration: none;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .login-box,
+  .cadastro-box {
+    padding: 25px 30px;
+    width: 300px;        /* ou deixe apenas max-width: 90vw; se preferir */
+  }
+
+  h2          { font-size: 1.6rem; }
+  label,
+  input,
+  button,
+  .register-text { font-size: 0.98rem; }
+}
+
+/* Celulares grandes (≤ 600 px) – caixa ocupa 85 % da tela */
+@media (max-width: 600px) {
+  .login-box,
+  .cadastro-box {
+    width: 85vw;         /* largura percentual p/ encaixar na tela */
+    padding: 25px;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .login-box,
+  .cadastro-box {
+    width: 92vw;
+    padding: 20px;
+  }
+
+  h2          { font-size: 1.4rem; }
+  label       { font-size: 0.9rem; }
+  button      { padding: 9px 18px; font-size: 0.9rem; }
+  .register-text { font-size: 0.85rem; }
+}
+
+/* Dispositivos ultrapequenos (≤ 320 px) – evita overflow lateral */
+@media (max-width: 320px) {
+  body { font-size: 14px; }    /* encolhe todo texto base */
+  .container { height: auto; padding: 20px 0; }  /* permite rolagem se precisar */
+}
