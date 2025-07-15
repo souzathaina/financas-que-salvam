@@ -7,7 +7,7 @@ $email = $_POST['email'] ?? '';
 $senha = $_POST['senha'] ?? '';
 
 if (empty($email) || empty($senha)) {
-    header("Location: ./"+/*pagina de login?*/+".php?sucesso=0&erro=campos_vazios");
+    header("Location: ./index.php?sucesso=0&erro=campos_vazios");
     exit();
 }
 
@@ -24,16 +24,16 @@ try {
 
     if ($resultado) {
         $_SESSION['usuario_id'] = $resultado['id'];
-        header("Location: /"+/*pagina do dashboard?*/+".php?sucesso=1");
+        header("Location: ./dashboard.php?sucesso=1");
         exit();
     } else {
-        header("Location: /"+/*pagina de login?*/+".php?sucesso=0&erro=credenciais_invalidas");
+        header("Location: ./index.php?sucesso=0&erro=credenciais_invalidas");
         exit();
     }
 } catch (PDOException $e) {
     error_log("Erro no login: " . $e->getMessage());
 
-    header("Location: /"+/*pagina de login?*/+".php?sucesso=0&erro=erro_interno");
+    header("Location: ./index.php?sucesso=0&erro=erro_interno");
     exit();
 }
 

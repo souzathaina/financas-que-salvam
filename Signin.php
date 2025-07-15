@@ -11,7 +11,7 @@ $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT); //senha com hash
 // verifica se o usuario passou pelo form 
 if (empty($email) || empty($senha)) {
     //$email e $senha estão vazios
-    header("Location: ./" . "pagina de cadastro?" . ".php?sucesso=0&erro=campos_vazios");
+    header("Location: ./index.php?sucesso=0&erro=campos_vazios");
     exit();
 }
 
@@ -23,13 +23,13 @@ try {
 
     if ($stmtVerifica->fetch()) {
         // email já existe
-        header("Location: /" . "pagina de cadastro?" . ".php?sucesso=0&erro=email_em_uso");
+        header("Location: ./index.php?sucesso=0&erro=email_em_uso");
         exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // formato do email é invalido
-        header("Location: /" . "pagina de cadastro?" . ".php?sucesso=0&erro=email_invalido");
+        header("Location: ./index.php?sucesso=0&erro=email_invalido");
         exit();
     }
 
@@ -37,7 +37,7 @@ try {
 
     if (!checkdnsrr($dominio, "MX")) {
         // dominio do email é invalido
-        header("Location: /" . "pagina de cadastro?" . ".php?sucesso=0&erro=dominio_invalido");
+        header("Location: ./index.php?sucesso=0&erro=dominio_invalido");
         exit();
     }
 
@@ -54,11 +54,11 @@ try {
     $usuario_id = $pdo->lastInsertId();
     $_SESSION['usuario_id'] = $usuario_id;
 
-    header("Location: /" . "pagina do dashboard?" . ".php?sucesso=1");
+    header("Location: ./dashboard.php?sucesso=1");
     exit();
 } catch (PDOException $e) {
     error_log("Erro no cadastro: " . $e->getMessage());
-    header("Location: /" . "pagina de cadastro?" . ".php?sucesso=0&erro=erro_interno");
+    header("Location: ./index.php?sucesso=0&erro=erro_interno");
     exit();
 }
 

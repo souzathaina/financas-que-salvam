@@ -4,7 +4,7 @@ include './Connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: /" +/*pagina de login?*/ +".php?sucesso=0&erro=Deslogado");
+    header("Location: ./dashboard.php?sucesso=0&erro=Deslogado");
     exit();
 }
 
@@ -12,9 +12,9 @@ $usuarioId = $_SESSION['usuario_id']; // ID do usuário logado
 $despesaId = $_POST['id'] ?? null; // ID da despesa a ser editada, vindo do form
 
 // verifica se o usuario passou pelo form 
-if (empty($despesa)) {
+if (empty($despesaId)) {
     //se os valores estiverem vazios
-    header("Location: /" . "pagina do dashboard?" . ".php?sucesso=0&erro=campos_vazios");
+    header("Location: ./dashboard.php?sucesso=0&erro=campos_vazios");
     exit();
 }
 

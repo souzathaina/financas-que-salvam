@@ -48,10 +48,11 @@ $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
               <option value="">Selecione</option>
 
               <?php
-              if ($categoria->num_rows > 0) {
-                while ($row = $categoria->fetch_assoc()) {
-                  echo '<option value="' . $row['id'] . '">' . $row['nome'] . '</option>';
-                }
+              $stmt->execute();
+              $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+              
+              foreach ($categorias as $categoria) {
+                echo '<option value="' . $categoria['id'] . '">' . $categoria['nome'] . '</option>';
               }
               ?>
 

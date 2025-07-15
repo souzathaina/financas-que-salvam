@@ -6,12 +6,15 @@ include './Connection.php';
 $nome = $_POST['nome'] ?? '';
 
 // verifica se o usuario esta logado
-if (!isset($_SESSION['usuario_id']))
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ./dashboard.php?sucesso=0&erro=nao_logado");
+    exit();
+}
 
 // verifica se o usuario passou pelo form 
 if (empty($nome)) {
     //se os valores estiverem vazios
-    header("Location: ./" . "pagina do dashboard?" . ".php?sucesso=0&erro=campos_vazios");
+    header("Location: ./dashboard.php?sucesso=0&erro=campos_vazios");
     exit();
 }
 
@@ -23,11 +26,11 @@ try {
         ':nome' => $nome,
     ]);
 
-    header("Location: /" . "pagina do dashboard?" . ".php?sucesso=1");
+    header("Location: ./dashboard.php?sucesso=1");
     exit();
 } catch (PDOException $e) {
     error_log("Erro no cadastro: " . $e->getMessage());
-    header("Location: /" . "pagina do dashboard?" . ".php?sucesso=0&erro=erro_interno");
+    header("Location: ./dashboard.php?sucesso=0&erro=erro_interno");
     exit();
 }
 
