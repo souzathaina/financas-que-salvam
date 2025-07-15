@@ -2,14 +2,7 @@
 session_start();
 include './Connection.php';
 
-// valores recebidos do form
-$email = $_POST['email'] ?? '';
-$senha = $_POST['senha'] ?? '';
-
-if (empty($email) || empty($senha)) {
-    header("Location: ./"+/*pagina de login?*/+".php?sucesso=0&erro=campos_vazios");
-    exit();
-}
+$usuario_id = $_SESSION['usuario_id'] ?? '';
 
 try {
     // Consulta com parâmetros protegidos
