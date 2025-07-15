@@ -1,8 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #cce9ff;
+  background-color: #f0f4fa; /* tom neutro para fundo */
   font-family: Arial, sans-serif;
+  color: #1b1b1b; /* cor padrão do texto */
 }
 
 .container {
@@ -15,24 +16,27 @@ body {
 /* Caixa do formulário de login */
 .login-box {
   position: relative;
-  background-color: #fff;
+  background-color: #ffffff; /* cor do "header" */
   padding: 30px 40px;
-  border: 2px solid #8000ff;
+  border: 2px solid #3B82F6;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 340px;
   max-width: 90vw;
+  color: #1b1b1b;
 }
 
 .login-box h2 {
   margin-bottom: 20px;
+  color: #3B82F6;
 }
 
 .login-box label {
   display: block;
   text-align: left;
   margin: 10px 0 5px;
+  color: #1b1b1b;
 }
 
 .login-box input[type="text"],
@@ -42,13 +46,13 @@ body {
   padding: 10px;
   border: none;
   border-radius: 6px;
-  background-color: #b3b3b3;
-  color: #000;
+  background-color: #dbe3ec;
+  color: #1b1b1b;
   margin-bottom: 15px;
 }
 
 .login-box button {
-  background-color: #1e90ff;
+  background-color: #1E90FF;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -58,16 +62,17 @@ body {
 }
 
 .login-box button:hover {
-  background-color: #0073e6;
+  background-color: #1C86EE;
 }
 
 .register-text {
   margin-top: 15px;
   font-size: 14px;
+  color: #1b1b1b;
 }
 
 .register-text a {
-  color: #0047ab;
+  color: #3B82F6;
   text-decoration: none;
 }
 
@@ -75,20 +80,19 @@ body {
   text-decoration: underline;
 }
 
-
 .voltar {
   position: absolute;
   left: 20px;
   top: 20px;
   text-decoration: none;
-  color: #333;
+  color: #1b1b1b;
   font-size: 30px;
   padding: 6px 12px;
   transition: all 0.2s ease;
 }
 
 .voltar:hover {
-  color: #1e90ff;
+  color: #1E90FF;
 }
 
 .voltar.mobile {
@@ -98,7 +102,7 @@ body {
   left: 12px;
   top: 12px;
   position: absolute;
-  color: #333;
+  color: #1b1b1b;
 }
 
 /* Responsividade */
