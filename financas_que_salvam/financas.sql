@@ -10,3 +10,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
     senha VARCHAR(255) NOT NULL
     
 );
+
+USE financas;
+
+ALTER TABLE usuarios
+ADD COLUMN valor DECIMAL(10,2) NOT NULL DEFAULT 0.00;  -- campo para armazenar o valor financeiro
+
+SELECT * FROM usuarios;
