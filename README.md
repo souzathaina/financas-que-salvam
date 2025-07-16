@@ -283,7 +283,18 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 
 ## 👥 Autores
 
-- **Seu Nome** - *Desenvolvimento inicial* - [SeuGitHub](https://github.com/seu-usuario)
+- **Thainá Tavares de Souza** - *Scrum Master* - https://github.com/souzathaina
+- **Priscila Schlotenfeldt da Silva** - *Product Owner* - https://github.com/PriscilaSchloten
+- **Leonardo Souza**  - Q/A, controle de branchs, organização do git e dashboard dinâmico* - https://github.com/leoverardo
+- **Vitor Machado** - *Banco de dados e teste de telas* - https://github.com/VitorMachado07
+- **João Pedro** - *Footer (css), aba sobre (css) e implementação de carrossel de imagens na index* - https://github.com/JaoPedros
+- **Pedro Gabriel Algayer Silveira** - *alerts(css), cadastro(css), login(css) e dashboard(css)* - https://github.com/PedroSenac123
+- **Lucas Boesel Hendler** - *Daschboard (css), index(css), despesas(css) e logo* - https://github.com/LucasBoesel
+- **Jair de Souza Ribeiro** - *teste de responsividade, gráficos barras, pizza e rosquinha e teste de telas* - https://github.com/jairsrib
+- **Gustavo Farias** - *Conexão* - https://github.com/Gustavofariass15
+- **Jeremias Fagundes Ribeiro** - *Banco de dados e alerts para tomadas de desisões* - https://github.com/jerezrib1
+- **Fabricio Lacerda Moraes** - *CadUsuário, Alerts, crud de categorias, login* - https://github.com/Hanso667
+- **Gustavo Kruger** - *Dashboard dinamica, logout, filtro mensal e por categoria e cadastro de despesas* - https://github.com/Gustavokvs
 
 ## 🙏 Agradecimentos
 
@@ -292,14 +303,34 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 - Google Fonts (Inter)
 - XAMPP
 
-## 📞 Suporte
-
-- Email: seu-email@exemplo.com
-- Issues: [GitHub Issues](https://github.com/seu-usuario/financas-que-salvam/issues)
-- Documentação: [Wiki do Projeto](https://github.com/seu-usuario/financas-que-salvam/wiki)
 
 ---
 
 **⭐ Se este projeto te ajudou, considere dar uma estrela no repositório!**
+
+## 💡 Quer contribuir?
+Se você se interessou pelo projeto Finanças que Salvam e deseja colaborar com melhorias, sugestões ou novas funcionalidades, será muito bem-vindo(a)!
+
+Formas de contribuir:
+👨‍💻 Corrigir bugs ou melhorar funcionalidades
+
+🧠 Sugerir melhorias de usabilidade ou novas ideias
+
+🎨 Ajudar na parte visual e responsiva
+
+🛡️ Revisar segurança e performance
+
+📖 Melhorar a documentação
+
+Como começar:
+Faça um fork do repositório
+
+Crie uma branch com sua contribuição (ex: feature/nova-funcionalidade)
+
+Envie um Pull Request com uma descrição clara das alterações
+
+Se tiver dúvidas ou quiser conversar sobre o projeto, sinta-se à vontade para abrir uma Issue. Toda ajuda é bem-vinda e reconhecida!
+
+✨ Juntos, podemos construir um sistema financeiro mais acessível, moderno e sustentável!
 
 **🌱 Finanças que Salvam - Controle financeiro com consciência ambiental e visual moderno**
