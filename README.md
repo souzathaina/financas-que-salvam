@@ -90,45 +90,56 @@
 ```
 financas-que-salvam/
 ├── assets/
-│   ├── js/
-│   │   ├── graficos.js           # Scripts de gráficos gerais
-│   │   └── graficoPesquisa.js    # Script do gráfico "Gastos x Salário" (dinâmico)
-│   └── css/
-│       ├── alerts.css
-│       ├── buttons.css
-│       ├── cadastrar_despesas.css
-│       ├── charts.css
-│       ├── dashboard.css
-│       ├── forms.css
-│       ├── header.css
-│       ├── index.css
-│       ├── tables.css
-│       └── utilities.css
+│   ├── css/
+│   │   ├── alerts.css
+│   │   ├── buttons.css
+│   │   ├── cadastrar.css
+│   │   ├── cadastrar_categoria.css
+│   │   ├── cadastrar_despesas.css
+│   │   ├── configurar_salario.css
+│   │   ├── dashboard.css
+│   │   ├── editar_despesas.css
+│   │   ├── editar_usuario.css
+│   │   ├── forms.css
+│   │   ├── header.css
+│   │   ├── index.css
+│   │   ├── login.css
+│   │   ├── tables.css
+│   │   ├── utilities.css
+│   │   └── charts.css
+│   └── js/
+│       ├── cadastrar.js
+│       ├── cadastrar_despesas.js
+│       ├── dashboard.js
+│       ├── editar_despesas.js
+│       ├── graficoPesquisa.js
+│       ├── graficos.js
+│       └── login.js
+├── cadastrar.php
+├── cadastrar_categoria.php
+├── cadastrar_despesas.php
+├── configurar_salario.php
+├── dashboard.php
+├── DeletarDespesa.php
+├── editar.php
+├── editar_despesa.php
+├── editar_usuario.php
+├── excluir.php
+├── financas.sql
+├── graficos.php
 ├── includes/
-│   ├── Connection.php            # Conexão com banco (novo caminho)
-│   ├── conexao.php
+│   ├── Connection.php
 │   ├── footer.php
 │   ├── header.php
 │   └── usuarioDashboard.php
 ├── index.php
-├── dashboard.php
 ├── login.php
-├── cadastrar.php
 ├── logout.php
-├── configurar_salario.php
-├── cadastrar_despesas.php
-├── cadastrar_categoria.php
-├── editar_despesa.php
-├── editar_usuario.php
-├── editar.php
-├── graficos.php
 ├── NovaCategoria.php
 ├── NovaDespesa.php
-├── EditarDespesa.php
-├── DeletarDespesa.php
-├── UsuarioDashboard.php
-├── financas.sql
-└── README.md
+├── README.md
+├── Signin.php
+└── UsuarioDashboard.php
 ```
 
 ## 🚀 Instalação
