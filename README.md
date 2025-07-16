@@ -293,8 +293,8 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 - **Jair de Souza Ribeiro** - *teste de responsividade, gráficos barras, pizza e rosquinha e teste de telas* - https://github.com/jairsrib
 - **Gustavo Farias** - *Conexão* - https://github.com/Gustavofariass15
 - **Jeremias Fagundes Ribeiro** - *Banco de dados e alerts para tomadas de desisões* - https://github.com/jerezrib1
-- **Fabricio Lacerda Moraes** - *CadUsuário, Alerts, crud de categorias, login* - https://github.com/Hanso667
-- **Gustavo Kruger** - *Dashboard dinamica, logout, filtro mensal e por categoria e cadastro de despesas* - https://github.com/Gustavokvs
+- **Fabricio Lacerda Moraes** - *CadUsuário, Alerts, crud de categorias, login e crud de despesas* - https://github.com/Hanso667
+- **Gustavo Kruger** - *Dashboard dinamica, logout, filtro mensal e por categoria, delete de despesas e cadastro de despesas* - https://github.com/Gustavokvs
 
 ## 🙏 Agradecimentos
 
