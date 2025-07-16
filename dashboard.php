@@ -1,7 +1,101 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 include './includes/usuarioDashboard.php';
+
+try {
+  $sqlDespesas = '
+    SELECT d.valor as valor_despesa, c.nome AS nome_categoria
+    FROM despesas AS d
+    LEFT JOIN categorias AS c ON c.id = d.categoria_id
+    WHERE d.usuario_id = :usuario_id
+      AND MONTH(d.data) = MONTH(CURDATE())
+      AND YEAR(d.data) = YEAR(CURDATE())
+    ORDER BY d.valor DESC
+    LIMIT 1;';
+
+  $stmtDespesas = $pdo->prepare($sqlDespesas);
+  $stmtDespesas->execute([
+    ':usuario_id' => $_SESSION['usuario_id']
+  ]);
+  $despesa = $stmtDespesas->fetch(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+  echo "<script> alert('Erro ao carregar despesas: $e')</script>";
+}
+
+try {
+  $sqlsalario = 'SELECT salario FROM usuarios WHERE usuario_id = :usuario_id';
+  $stmtsalario = $pdo->prepare($sqlsalario);
+  $stmtsalario->execute([
+    ':usuario_id' => $_SESSION['usuario_id']
+  ]);
+  $dadosSalario  = $stmtsalario->fetch(PDO::FETCH_ASSOC);
+  $salario = $dadosSalario['salario'];
+} catch (PDOException $e) {
+  echo "<script> alert('Erro ao carregar salario: $e')</script>";
+}
+$categoriaMaisGasta = $despesa['nome_categoria'];
+$valorCategoriaMaisGasta = $despesa['valor_despesa'];
+
+function sugestaoAlternativa($valor)
+{
+  if ($valor >= 5000) return "uma moto usada 🛵";
+  if ($valor >= 2500) return "uma TV 4K de 55\" 📺";
+  if ($valor >= 1000) return "um celular intermediário 📱";
+  if ($valor >= 500) return "uma assinatura anual de streaming, internet e academia 💪";
+  if ($valor >= 200) return "um final de semana em um hotel fazenda 🏕️";
+  if ($valor >= 100) return "vários jantares em restaurante 🍽️";
+  if ($valor >= 50) return "um bom livro e um jantar 🍷📖";
+  return "vários lanches no iFood 🍔";
+}
+
+$itemSugestao = sugestaoAlternativa($valorCategoriaMaisGasta);
+
+$mensagens = [
+  'Alimentação' => [
+    "Você gastou bastante com alimentação! Que tal preparar mais refeições em casa? É mais barato e saudável.",
+    "Com esse valor em comida, dava para comprar $itemSugestao!",
+    "Já pensou em trocar delivery por marmita caseira? Economia garantida!"
+  ],
+  'Transporte' => [
+    "Economizando com transporte, você ajuda o meio ambiente e ainda sobra mais no bolso!",
+    "Dava pra comprar $itemSugestao... Que tal experimentar transporte público ou bicicleta?",
+    "Esse valor gasto com transporte poderia virar uma viagem de fim de semana se fosse economizado!"
+  ],
+  'Lazer' => [
+    "Com o que você gastou em lazer, dava pra comprar $itemSugestao!",
+    "Aproveitar é bom, mas que tal um lazer mais em conta? Um piquenique no parque talvez!",
+    "Muito bem! Mas lembre-se: equilibrar diversão e economia é o segredo."
+  ],
+  'Moradia' => [
+    "Você pode reduzir os custos de moradia com pequenas atitudes: economizar luz, água e gás faz diferença!",
+    "Já pensou em revisar contratos ou renegociar tarifas? Pode reduzir bastante sua conta!",
+    "Com esse valor, dava pra comprar $itemSugestao!"
+  ],
+  'Educação' => [
+    "Investir em educação é ótimo! Mas sempre vale comparar preços entre cursos e plataformas gratuitas.",
+    "Esse gasto com educação pode ser valioso se for bem direcionado. Planeje bem!",
+    "Já tentou bolsas ou cursos gratuitos online? Pode aprender muito sem gastar tanto."
+  ],
+  'Saúde' => [
+    "Saúde é essencial, mas pesquisar opções com melhor custo-benefício é fundamental!",
+    "Esse valor daria para comprar $itemSugestao!",
+    "Considere clínicas populares ou programas do governo para serviços mais acessíveis."
+  ],
+  'Outros' => [
+    "Tente priorizar gastos que tragam retorno a longo prazo. Os 'outros' podem estar te sabotando.",
+    "Gastos diversos merecem atenção. Está tudo mesmo valendo o que custou?",
+    "Organize os 'outros' gastos para entender onde está o furo no orçamento."
+  ]
+];
+
+$mensagemImpacto = '';
+
+if ($valorCategoriaMaisGasta > $salario / 2) {
+  if (array_key_exists($categoriaMaisGasta, $mensagens)) {
+    $mensagemImpacto = $mensagens[$categoriaMaisGasta][array_rand($mensagens[$categoriaMaisGasta])];
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +153,9 @@ include './includes/usuarioDashboard.php';
     <section class="welcome-section">
       <h1>Bem-vindo ao seu Dashboard Financeiro!</h1>
       <p>Monitore seus gastos e mantenha suas finanças em ordem.</p>
+      <br>
+      <p>Você mais gastou esse mes em: <?php echo $categoriaMaisGasta ?>! </p>
+      <h1> <?php echo $mensagemImpacto ?> </h1>
     </section>
 
     <!-- AÇÕES RÁPIDAS -->
