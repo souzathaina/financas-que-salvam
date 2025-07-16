@@ -19,8 +19,7 @@ include './includes/usuarioDashboard.php';
   <link rel="stylesheet" href="assets/css/buttons.css">
   <link rel="stylesheet" href="assets/css/alerts.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
-  <style>
-  </style>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -121,8 +120,56 @@ include './includes/usuarioDashboard.php';
       
       <div class="grafico-card">
         <h3>Gastos vs Salário</h3>
+        <!-- Formulário de filtro para o gráfico Gastos vs Salário -->
+        <form id="form-grafico-pesquisa" class="form-filtro-grafico">
+          <div class="form-group">
+            <label for="mes-pesquisa">Mês:</label>
+            <select name="mes" id="mes-pesquisa" class="input-filtro">
+              <option value="">Todos</option>
+              <?php
+                $meses = [
+                  '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril',
+                  '05' => 'Maio', '06' => 'Junho', '07' => 'Julho', '08' => 'Agosto',
+                  '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
+                ];
+                foreach ($meses as $num => $nome): ?>
+                  <option value="<?= $num ?>"><?= $nome ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ano-pesquisa">Ano:</label>
+            <select name="ano" id="ano-pesquisa" class="input-filtro">
+              <option value="">Todos</option>
+              <?php $anoAtual = date('Y');
+                for ($i = $anoAtual; $i >= $anoAtual - 5; $i--): ?>
+                  <option value="<?= $i ?>"><?= $i ?></option>
+              <?php endfor; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="categoria-pesquisa">Categoria:</label>
+            <select name="categoria_id" id="categoria-pesquisa" class="input-filtro">
+              <option value="">Todas</option>
+              <?php
+                // Buscar categorias para o filtro
+                try {
+                  $sqlCat = 'SELECT id, nome FROM categorias ORDER BY nome';
+                  $stmtCat = $pdo->prepare($sqlCat);
+                  $stmtCat->execute();
+                  $categoriasFiltro = $stmtCat->fetchAll(PDO::FETCH_ASSOC);
+                } catch (PDOException $e) {
+                  $categoriasFiltro = [];
+                }
+                foreach ($categoriasFiltro as $categoria): ?>
+                  <option value="<?= htmlspecialchars($categoria['id']) ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <button type="submit" class="btn-dashboard azul">Filtrar</button>
+        </form>
         <div class="chart-container">
-          <canvas id="chartSalario"></canvas>
+          <canvas id="chartPesquisa"></canvas>
         </div>
       </div>
     </section>
@@ -183,29 +230,8 @@ include './includes/usuarioDashboard.php';
     };
   </script>
   <script src="assets/js/graficos.js"></script>
-  <script>
-    // Funções para ações
-    function editarDespesa(id) {
-      window.location.href = 'editar_despesa.php?id=' + id;
-    }
-
-    function deletarDespesa(id) {
-      if (confirm('Tem certeza que deseja excluir esta despesa?')) {
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'DeletarDespesa.php';
-        
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'id';
-        input.value = id;
-        
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-      }
-    }
-  </script>
+  <script src="assets/js/graficoPesquisa.js" defer></script>
+  <script src="assets/js/dashboard.js" defer></script>
 </body>
 
 </html>

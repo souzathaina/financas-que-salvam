@@ -87,3 +87,50 @@ document.querySelectorAll('input[name="chartType"]').forEach(radio => {
     updateChartType(event.target.value);
   });
 });
+
+// Gráfico Gastos vs Salário
+const ctxSalario = document.getElementById('chartSalario').getContext('2d');
+const dadosSalario = window.graficoSalario || { salario: 0, gasto: 0 };
+
+const chartSalario = new Chart(ctxSalario, {
+  type: 'bar',
+  data: {
+    labels: ['Salário', 'Gastos'],
+    datasets: [{
+      label: 'R$ (Reais)',
+      data: [dadosSalario.salario, dadosSalario.gasto],
+      backgroundColor: [
+        'rgba(46, 204, 113, 0.7)', // Salário
+        'rgba(231, 76, 60, 0.7)'   // Gastos
+      ],
+      borderColor: [
+        'rgba(46, 204, 113, 1)',
+        'rgba(231, 76, 60, 1)'
+      ],
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Gastos vs Salário',
+        font: { size: 16, weight: 'bold' },
+        padding: { top: 10, bottom: 20 }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value) {
+            return 'R$ ' + value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+          }
+        }
+      }
+    }
+  }
+});

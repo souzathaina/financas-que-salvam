@@ -81,6 +81,75 @@
 .btn-dashboard.vermelho:hover {
   background-color: #c0392b;
 }
+.form-filtro-grafico {
+  margin-bottom: 18px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 18px 20px 10px 20px;
+  box-shadow: 0 2px 8px rgba(30,144,255,0.06);
+}
+.form-filtro-grafico .form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+}
+.form-filtro-grafico label {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #1E90FF;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.form-filtro-grafico .input-filtro {
+  padding: 10px 14px;
+  border: 1.5px solid #d1e3fa;
+  border-radius: 7px;
+  background: #fff;
+  font-size: 1rem;
+  color: #222;
+  transition: border 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(30,144,255,0.03);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.form-filtro-grafico .input-filtro:focus {
+  border-color: #1E90FF;
+  box-shadow: 0 0 0 2px rgba(30,144,255,0.10);
+}
+.form-filtro-grafico .input-filtro option {
+  color: #222;
+}
+.form-filtro-grafico .btn-dashboard {
+  min-width: 110px;
+  height: 42px;
+  margin-top: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 7px;
+  box-shadow: 0 2px 8px rgba(30,144,255,0.07);
+  align-self: flex-end;
+}
+@media (max-width: 700px) {
+  .form-filtro-grafico {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 8px 8px 8px;
+  }
+  .form-filtro-grafico .form-group {
+    min-width: 100px;
+  }
+  .form-filtro-grafico .btn-dashboard {
+    width: 100%;
+    align-self: stretch;
+  }
+}
 
 .stats-grid {
   display: grid;
