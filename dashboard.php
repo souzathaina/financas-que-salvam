@@ -4,53 +4,125 @@ require_once 'includes/conexao.php'; // Inclui seu arquivo de conexão com o ban
 require_once 'includes/funcoes.php'; // Inclui seu arquivo de funções, que deve ter usuarioLogado()
 
 // --- 1. VERIFICAÇÃO DE SESSÃO ---
-// Redireciona para a página de login se o usuário não estiver logado
 if (!usuarioLogado()) {
     header("Location: login.php");
     exit;
 }
 
-// Pega o ID e nome do usuário da sessão
 $usuarioId = $_SESSION['id'];
-$usuarioNome = $_SESSION['nome']; // Assumindo que o nome do usuário está armazenado na sessão
+$usuarioNome = $_SESSION['nome'];
 
-// --- 2. DADOS DAS DESPESAS DO USUÁRIO ---
-$despesas = []; // Array para armazenar as despesas do usuário
+// --- 2. Parâmetros de Filtro e Pesquisa ---
+$termoPesquisa = $_GET['pesquisa'] ?? '';
+$filtroMes = $_GET['mes'] ?? ''; // Mês selecionado (formato MM)
+$filtroAno = $_GET['ano'] ?? date('Y'); // Ano selecionado (padrão: ano atual)
+$filtroCategoriaId = $_GET['categoria_id'] ?? ''; // ID da categoria selecionada
+
+// Array de meses para o dropdown
+$meses = [
+    '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril',
+    '05' => 'Maio', '06' => 'Junho', '07' => 'Julho', '08' => 'Agosto',
+    '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
+];
+
+// Carregar categorias para o dropdown de filtro
+$categoriasFiltro = [];
 try {
-    // Consulta para buscar as despesas do usuário logado
-    // Fazendo um JOIN com a tabela 'categorias' para pegar o nome da categoria
+    $sqlCategoriasFiltro = 'SELECT id, nome FROM categorias ORDER BY nome';
+    $stmtCategoriasFiltro = $pdo->prepare($sqlCategoriasFiltro);
+    $stmtCategoriasFiltro->execute();
+    $categoriasFiltro = $stmtCategoriasFiltro->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    error_log("Erro ao carregar categorias para filtro: " . $e->getMessage());
+    // Você pode definir uma mensagem de erro para exibir se as categorias não carregarem.
+}
+
+
+// --- 3. DADOS DAS DESPESAS DO USUÁRIO (com filtros) ---
+$despesas = [];
+try {
     $sqlDespesas = "SELECT d.id, d.data, c.nome AS categoria_nome, d.descricao, d.valor
                     FROM despesas d
                     JOIN categorias c ON d.categoria_id = c.id
-                    WHERE d.usuario_id = :usuario_id
-                    ORDER BY d.data DESC, d.criado_em DESC"; // Ordena as despesas por data e depois por criação
+                    WHERE d.usuario_id = :usuario_id";
+    
+    $params = ['usuario_id' => $usuarioId];
+
+    // Adiciona filtro por mês e ano
+    if (!empty($filtroMes) && !empty($filtroAno)) {
+        // Para MySQL: MONTH(d.data) = :mes AND YEAR(d.data) = :ano
+        // Para PostgreSQL: EXTRACT(MONTH FROM d.data) = :mes AND EXTRACT(YEAR FROM d.data) = :ano
+        // Para SQLite: STRFTIME('%m', d.data) = :mes AND STRFTIME('%Y', d.data) = :ano
+        
+        // Exemplo para MySQL (mais comum com XAMPP/WAMP):
+        $sqlDespesas .= " AND MONTH(d.data) = :mes AND YEAR(d.data) = :ano";
+        $params[':mes'] = (int)$filtroMes;
+        $params[':ano'] = (int)$filtroAno;
+        
+        // Se estiver usando PostgreSQL, substitua por:
+        // $sqlDespesas .= " AND EXTRACT(MONTH FROM d.data) = :mes AND EXTRACT(YEAR FROM d.data) = :ano";
+        // Se estiver usando SQLite, substitua por:
+        // $sqlDespesas .= " AND STRFTIME('%m', d.data) = :mes AND STRFTIME('%Y', d.data) = :ano";
+    }
+
+    // Adiciona filtro por categoria
+    if (!empty($filtroCategoriaId)) {
+        $sqlDespesas .= " AND d.categoria_id = :categoria_id";
+        $params[':categoria_id'] = (int)$filtroCategoriaId;
+    }
+
+    // Adiciona a condição de pesquisa textual (se houver)
+    if (!empty($termoPesquisa)) {
+        $sqlDespesas .= " AND (LOWER(d.descricao) LIKE LOWER(:termo_pesquisa) OR LOWER(c.nome) LIKE LOWER(:termo_pesquisa))";
+        $params[':termo_pesquisa'] = '%' . $termoPesquisa . '%';
+    }
+
+    $sqlDespesas .= " ORDER BY d.data DESC, d.criado_em DESC";
+
     $stmtDespesas = $pdo->prepare($sqlDespesas);
-    $stmtDespesas->execute(['usuario_id' => $usuarioId]);
+    $stmtDespesas->execute($params);
     $despesas = $stmtDespesas->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
-    // Em caso de erro ao carregar despesas
     error_log("Erro ao carregar despesas: " . $e->getMessage());
     $erro_despesas = "Não foi possível carregar suas despesas. Tente novamente mais tarde.";
 }
 
-// --- Cálculo do Total Gasto no Mês (Exemplo Simples) ---
-// Você pode adaptar isso para o mês atual, ou um período específico
+// --- Cálculo do Total Gasto no Mês (agora reflete os filtros) ---
 $totalGastoMes = 0;
 foreach ($despesas as $despesa) {
-    // Aqui você pode adicionar lógica para filtrar pelo mês atual se quiser
-    // Por exemplo: if (date('Y-m', strtotime($despesa['data'])) === date('Y-m')) { ... }
     $totalGastoMes += $despesa['valor'];
 }
 
-// --- Mensagens de Status (se vierem de outras páginas, como exclusão) ---
+// --- Mensagens de Status ---
 $statusMensagem = '';
+$tipoMensagem = '';
+
 if (isset($_GET['status'])) {
-    if ($_GET['status'] === 'sucesso_exclusao') {
-        $statusMensagem = '<p style="color: green; text-align: center;">Despesa excluída com sucesso!</p>';
-    } elseif ($_GET['status'] === 'erro_exclusao') {
-        $statusMensagem = '<p style="color: red; text-align: center;">Erro ao excluir despesa.</p>';
+    if ($_GET['status'] === 'sucesso') {
+        $tipoMensagem = 'sucesso';
         if (isset($_GET['msg'])) {
-            $statusMensagem .= '<p style="color: red; text-align: center;">Detalhes: ' . htmlspecialchars($_GET['msg']) . '</p>';
+            switch ($_GET['msg']) {
+                case 'despesa_cadastrada': $statusMensagem = 'Despesa cadastrada com sucesso!'; break;
+            }
+        }
+    } elseif ($_GET['status'] === 'sucesso_exclusao') {
+        $tipoMensagem = 'sucesso';
+        $statusMensagem = 'Despesa excluída com sucesso!';
+    } elseif ($_GET['status'] === 'erro_exclusao') {
+        $tipoMensagem = 'erro';
+        $statusMensagem = 'Erro ao excluir despesa.';
+        if (isset($_GET['msg'])) {
+            $statusMensagem .= ' Detalhes: ' . htmlspecialchars($_GET['msg']);
+        }
+    } elseif ($_GET['status'] === 'erro') {
+        $tipoMensagem = 'erro';
+        if (isset($_GET['msg'])) {
+            switch ($_GET['msg']) {
+                case 'campos_vazios': $statusMensagem = 'Por favor, preencha todos os campos obrigatórios.'; break;
+                case 'valor_invalido': $statusMensagem = 'O valor da despesa é inválido.'; break;
+                case 'erro_interno': $statusMensagem = 'Ocorreu um erro interno. Tente novamente mais tarde.'; break;
+            }
         }
     }
 }
@@ -66,8 +138,7 @@ if (isset($_GET['status'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
     <script src="https://kit.fontawesome.com/a2d9d3f09f.js" crossorigin="anonymous"></script>
-   
-</head>
+    </head>
 
 <body>
     <header class="header">
@@ -86,12 +157,14 @@ if (isset($_GET['status'])) {
             <p>Veja como seus gastos afetam seu bolso e o planeta.</p>
 
             <?php if (!empty($statusMensagem)): ?>
-                <?= $statusMensagem ?>
+                <div class="mensagem-status <?= htmlspecialchars($tipoMensagem) ?>">
+                    <?= htmlspecialchars($statusMensagem) ?>
+                </div>
             <?php endif; ?>
 
             <div class="cards">
                 <div class="card">
-                    <h3>Total gasto no mês</h3>
+                    <h3>Total gasto filtrado</h3>
                     <p class="valor">R$ <?= number_format($totalGastoMes, 2, ',', '.') ?></p>
                 </div>
                 <div class="card destaque">
@@ -103,16 +176,76 @@ if (isset($_GET['status'])) {
 
             <h2 style="margin-top: 40px; text-align: center;">Minhas Despesas</h2>
 
-            <div style="margin-top: 20px; display: flex; justify-content: center;">
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
                 <a href="cadastrar.php" class="btn-verde">Cadastrar Nova Despesa</a>
             </div>
 
+            <div style="margin-top: 20px; text-align: center;">
+                <form action="dashboard.php" method="GET" class="search-bar">
+                    <input type="text" name="pesquisa" placeholder="Pesquisar por descrição ou categoria..." 
+                           value="<?= htmlspecialchars($termoPesquisa) ?>">
+                    <button type="submit">Pesquisar</button>
+                    <?php if (!empty($termoPesquisa) || !empty($filtroMes) || !empty($filtroCategoriaId)): ?>
+                        <a href="dashboard.php" class="btn-azul" style="text-decoration: none;">Limpar Filtros</a>
+                    <?php endif; ?>
+                </form>
+            </div>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <form action="dashboard.php" method="GET" class="filter-bar">
+                    <?php if (!empty($termoPesquisa)): ?>
+                        <input type="hidden" name="pesquisa" value="<?= htmlspecialchars($termoPesquisa) ?>">
+                    <?php endif; ?>
+
+                    <label for="mes">Mês:</label>
+                    <select name="mes" id="mes">
+                        <option value="">Todos</option>
+                        <?php foreach ($meses as $num => $nome): ?>
+                            <option value="<?= htmlspecialchars($num) ?>" 
+                                <?= ($filtroMes === $num) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($nome) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <label for="ano">Ano:</label>
+                    <select name="ano" id="ano">
+                        <?php 
+                        $anoAtual = date('Y');
+                        for ($i = $anoAtual; $i >= $anoAtual - 5; $i--): // Últimos 5 anos
+                        ?>
+                            <option value="<?= htmlspecialchars($i) ?>" 
+                                <?= ((string)$filtroAno === (string)$i) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($i) ?>
+                            </option>
+                        <?php endfor; ?>
+                    </select>
+
+                    <label for="categoria_id">Categoria:</label>
+                    <select name="categoria_id" id="categoria_id">
+                        <option value="">Todas</option>
+                        <?php foreach ($categoriasFiltro as $categoria): ?>
+                            <option value="<?= htmlspecialchars($categoria['id']) ?>" 
+                                <?= ((string)$filtroCategoriaId === (string)$categoria['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($categoria['nome']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    
+                    <button type="submit">Filtrar</button>
+                </form>
+            </div>
 
             <?php if (!empty($erro_despesas)): ?>
                 <p style="color: red; text-align: center;"><?= htmlspecialchars($erro_despesas) ?></p>
             <?php elseif (empty($despesas)): ?>
-                <p style="text-align: center; margin-top: 20px;">Você ainda não tem despesas cadastradas. Comece adicionando
-                    uma!</p>
+                <p style="text-align: center; margin-top: 20px;">
+                    <?php if (!empty($termoPesquisa) || !empty($filtroMes) || !empty($filtroCategoriaId)): ?>
+                        Nenhuma despesa encontrada com os filtros e/ou pesquisa aplicados.
+                    <?php else: ?>
+                        Você ainda não tem despesas cadastradas. Comece adicionando uma!
+                    <?php endif; ?>
+                </p>
             <?php else: ?>
                 <table class="tabela-despesas">
                     <thead>
