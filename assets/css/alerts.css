@@ -1,0 +1,222 @@
+/* Alertas CSS - Responsivo */
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeaa7;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-color: #bee5eb;
+}
+
+.alert i {
+  font-size: 1.1rem;
+}
+
+.alert-success i {
+  color: #28a745;
+}
+
+.alert-error i {
+  color: #dc3545;
+}
+
+.alert-warning i {
+  color: #ffc107;
+}
+
+.alert-info i {
+  color: #17a2b8;
+}
+
+.alert-dismissible {
+  position: relative;
+  padding-right: 40px;
+}
+
+.alert-close {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.alert-close:hover {
+  opacity: 1;
+}
+
+.message-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.message-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.message-card i {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.message-card.success i {
+  color: #28a745;
+}
+
+.message-card.error i {
+  color: #dc3545;
+}
+
+.message-card.warning i {
+  color: #ffc107;
+}
+
+.message-card.info i {
+  color: #17a2b8;
+}
+
+.message-card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.message-card p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .alert {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+  
+  .alert i {
+    font-size: 1rem;
+  }
+  
+  .message-container {
+    padding: 15px;
+  }
+  
+  .message-card {
+    padding: 25px;
+  }
+  
+  .message-card i {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .alert {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .alert i {
+    font-size: 0.9rem;
+  }
+  
+  .message-container {
+    padding: 10px;
+  }
+  
+  .message-card {
+    padding: 20px;
+  }
+  
+  .message-card i {
+    font-size: 2rem;
+  }
+  
+  .message-card h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .alert {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .alert i {
+    font-size: 0.85rem;
+  }
+  
+  .message-card {
+    padding: 15px;
+  }
+  
+  .message-card i {
+    font-size: 1.8rem;
+  }
+  
+  .message-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .alert-close {
+    transition: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .message-card {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .message-card h3 {
+    color: #e2e8f0;
+  }
+  
+  .message-card p {
+    color: #cbd5e0;
+  }
+} 

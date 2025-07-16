@@ -54,8 +54,11 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configurar Salário - Finanças que Salvam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/index.css">
-  <script src="https://kit.fontawesome.com/a2d9d3f09f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/forms.css">
+  <link rel="stylesheet" href="assets/css/buttons.css">
+  <link rel="stylesheet" href="assets/css/alerts.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
   <style>
     .config-container {
       max-width: 600px;
@@ -134,6 +137,60 @@ try {
       color: #666;
       font-size: 0.9rem;
       margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .config-container {
+        margin: 20px auto;
+        padding: 20px;
+      }
+      
+      .btn-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .btn-verde,
+      .btn-cancelar {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .config-container {
+        margin: 10px auto;
+        padding: 15px;
+      }
+      
+      .config-container h1 {
+        font-size: 1.5rem;
+      }
+      
+      .form-group input {
+        font-size: 16px; /* Evita zoom no iOS */
+      }
+      
+      .voltar-link {
+        top: 10px;
+        left: 10px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .config-container {
+        padding: 10px;
+      }
+      
+      .config-container h1 {
+        font-size: 1.3rem;
+      }
+      
+      .form-group {
+        margin-bottom: 15px;
+      }
     }
   </style>
 </head>

@@ -231,3 +231,183 @@ body {
 .btn-verde:hover {
   background-color: #27ae60;
 }
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+  }
+  
+  .hero {
+    padding: 60px 20px;
+  }
+  
+  .hero-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .btn-hero {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.3rem;
+  }
+  
+  .dashboard {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  
+  .main-content {
+    padding: 0;
+  }
+  
+  .main-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .card {
+    padding: 15px;
+  }
+  
+  .valor {
+    font-size: 1.3rem;
+  }
+  
+  .tabela-despesas {
+    font-size: 0.85rem;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 12px 8px;
+  }
+  
+  /* Ocultar colunas menos importantes em mobile */
+  .tabela-despesas th:nth-child(2),
+  .tabela-despesas td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header .container {
+    padding: 10px 15px;
+  }
+  
+  .hero {
+    padding: 40px 15px;
+  }
+  
+  .hero-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .btn-hero {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .dashboard {
+    padding: 30px 15px;
+  }
+  
+  .main-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+  
+  .valor {
+    font-size: 1.2rem;
+  }
+  
+  .tabela-despesas {
+    font-size: 0.8rem;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 8px 6px;
+  }
+  
+  /* Ocultar mais colunas em telas muito pequenas */
+  .tabela-despesas th:nth-child(3),
+  .tabela-despesas td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-content h2 {
+    font-size: 1.2rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+  
+  .main-content h1 {
+    font-size: 1.3rem;
+  }
+  
+  .card {
+    padding: 10px;
+  }
+  
+  .valor {
+    font-size: 1.1rem;
+  }
+  
+  .tabela-despesas {
+    font-size: 0.75rem;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 6px 4px;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .btn-editar,
+  .btn-excluir,
+  .btn-azul,
+  .btn-verde {
+    transition: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .card,
+  .tabela-despesas {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .tabela-despesas thead {
+    background-color: #4a5568;
+  }
+  
+  .tabela-despesas tbody tr:hover {
+    background-color: #4a5568;
+  }
+}

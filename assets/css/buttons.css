@@ -1,0 +1,186 @@
+/* Botões CSS - Responsivo */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  justify-content: center;
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: #1E90FF;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1C86EE;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+.btn-warning {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1E90FF;
+  border: 2px solid #1E90FF;
+}
+
+.btn-outline:hover {
+  background-color: #1E90FF;
+  color: white;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  min-width: 100px;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  min-width: 140px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-container.vertical {
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-container.vertical .btn {
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+  
+  .btn-container {
+    gap: 10px;
+  }
+  
+  .btn-container.vertical .btn {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    min-width: 80px;
+  }
+  
+  .btn-container {
+    gap: 8px;
+  }
+  
+  .btn-container.vertical .btn {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    min-width: 70px;
+  }
+  
+  .btn-container {
+    gap: 6px;
+  }
+  
+  .btn-container.vertical .btn {
+    max-width: 180px;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+  
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .btn-outline {
+    color: #74b9ff;
+    border-color: #74b9ff;
+  }
+  
+  .btn-outline:hover {
+    background-color: #74b9ff;
+    color: #2d3748;
+  }
+} 

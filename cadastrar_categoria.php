@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $usuario_id = $_SESSION['usuario_id'];
 
-// Busca categorias disponíveis
+// Busca categorias existentes para mostrar
 try {
     $sql = 'SELECT id, nome FROM categorias ORDER BY nome';
     $stmt = $pdo->prepare($sql);
@@ -38,7 +38,7 @@ try {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastrar Despesa - Finanças que Salvam</title>
+  <title>Nova Categoria - Finanças que Salvam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -47,13 +47,13 @@ try {
   <link rel="stylesheet" href="assets/css/alerts.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
   <style>
-    .cadastro-container {
+    .categoria-container {
       min-height: 100vh;
       background: linear-gradient(to bottom, #a8cdfc 0%, #dceefc 60%, #ffffff 100%);
       padding: 20px;
     }
     
-    .cadastro-card {
+    .categoria-card {
       max-width: 600px;
       margin: 50px auto;
       background: white;
@@ -62,35 +62,24 @@ try {
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
     
-    .cadastro-header {
+    .categoria-header {
       text-align: center;
       margin-bottom: 30px;
     }
     
-    .cadastro-header h1 {
+    .categoria-header h1 {
       color: #1E90FF;
       font-size: 2rem;
       margin-bottom: 10px;
     }
     
-    .cadastro-header p {
+    .categoria-header p {
       color: #666;
       font-size: 1rem;
     }
     
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    
     .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-group.full-width {
-      grid-column: 1 / -1;
+      margin-bottom: 25px;
     }
     
     .form-group label {
@@ -101,9 +90,7 @@ try {
       font-size: 0.9rem;
     }
     
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
+    .form-group input {
       width: 100%;
       padding: 12px 16px;
       border: 2px solid #e1e5e9;
@@ -113,17 +100,10 @@ try {
       box-sizing: border-box;
     }
     
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
+    .form-group input:focus {
       outline: none;
       border-color: #1E90FF;
       box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
-    }
-    
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
     }
     
     .btn-container {
@@ -206,12 +186,36 @@ try {
       margin-top: 5px;
     }
     
+    .categorias-existentes {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e1e5e9;
+    }
+    
+    .categorias-existentes h3 {
+      color: #1E90FF;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    
+    .categorias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    
+    .categoria-item {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      border: 1px solid #e1e5e9;
+    }
+    
     @media (max-width: 768px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      
-      .cadastro-card {
+      .categoria-card {
         margin: 20px auto;
         padding: 20px;
       }
@@ -227,25 +231,27 @@ try {
         text-align: center;
         justify-content: center;
       }
+      
+      .categorias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
     }
     
     @media (max-width: 480px) {
-      .cadastro-container {
+      .categoria-container {
         padding: 10px;
       }
       
-      .cadastro-card {
+      .categoria-card {
         margin: 10px auto;
         padding: 15px;
       }
       
-      .cadastro-header h1 {
+      .categoria-header h1 {
         font-size: 1.5rem;
       }
       
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
+      .form-group input {
         font-size: 16px; /* Evita zoom no iOS */
       }
       
@@ -254,19 +260,33 @@ try {
         left: 10px;
         font-size: 0.9rem;
       }
+      
+      .categorias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+      }
+      
+      .categoria-item {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
     }
     
     @media (max-width: 360px) {
-      .cadastro-card {
+      .categoria-card {
         padding: 10px;
       }
       
-      .cadastro-header h1 {
+      .categoria-header h1 {
         font-size: 1.3rem;
       }
       
       .form-group {
         margin-bottom: 15px;
+      }
+      
+      .categorias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
       }
     }
   </style>
@@ -278,39 +298,36 @@ try {
     Voltar ao Dashboard
   </a>
 
-  <div class="cadastro-container">
-    <div class="cadastro-card">
-      <div class="cadastro-header">
-        <h1><i class="fas fa-plus-circle"></i> Nova Despesa</h1>
-        <p>Registre uma nova despesa para manter o controle financeiro</p>
+  <div class="categoria-container">
+    <div class="categoria-card">
+      <div class="categoria-header">
+        <h1><i class="fas fa-tags"></i> Nova Categoria</h1>
+        <p>Crie uma nova categoria para organizar suas despesas</p>
       </div>
 
       <?php if (isset($_GET['sucesso'])): ?>
         <?php if ($_GET['sucesso'] == '1'): ?>
           <div class="alert sucesso">
-            <i class="fas fa-check-circle"></i> Despesa cadastrada com sucesso!
+            <i class="fas fa-check-circle"></i> Categoria criada com sucesso!
           </div>
         <?php else: ?>
           <div class="alert erro">
             <i class="fas fa-exclamation-triangle"></i> 
             <?php 
-              $erro = 'Erro ao cadastrar despesa.';
+              $erro = 'Erro ao criar categoria.';
               if (isset($_GET['erro'])) {
                 switch ($_GET['erro']) {
                   case 'campos_vazios':
-                    $erro = 'Por favor, preencha todos os campos obrigatórios.';
+                    $erro = 'Por favor, insira o nome da categoria.';
                     break;
-                  case 'valor_invalido':
-                    $erro = 'Por favor, insira um valor válido para a despesa.';
+                  case 'categoria_existe':
+                    $erro = 'Esta categoria já existe.';
                     break;
-                  case 'data_invalida':
-                    $erro = 'Por favor, insira uma data válida.';
-                    break;
-                  case 'categoria_invalida':
-                    $erro = 'Por favor, selecione uma categoria válida.';
+                  case 'nome_muito_curto':
+                    $erro = 'O nome da categoria deve ter pelo menos 3 caracteres.';
                     break;
                   default:
-                    $erro = 'Erro ao cadastrar despesa. Tente novamente.';
+                    $erro = 'Erro ao criar categoria. Tente novamente.';
                 }
               }
               echo htmlspecialchars($erro);
@@ -319,72 +336,20 @@ try {
         <?php endif; ?>
       <?php endif; ?>
 
-      <form action="NovaDespesa.php" method="POST" id="despesaForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="categoria">Categoria *</label>
-            <select id="categoria" name="categoria" required>
-              <option value="">Selecione uma categoria</option>
-              <?php foreach ($categorias as $categoria): ?>
-                <option value="<?php echo $categoria['id']; ?>">
-                  <?php echo htmlspecialchars($categoria['nome']); ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-            <div class="info-text">
-              <i class="fas fa-info-circle"></i> 
-              Selecione a categoria que melhor representa esta despesa
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="valor">Valor (R$) *</label>
-            <input 
-              type="number" 
-              id="valor" 
-              name="valor" 
-              step="0.01" 
-              min="0.01" 
-              placeholder="0,00"
-              required
-            />
-            <div class="info-text">
-              <i class="fas fa-info-circle"></i> 
-              Use vírgula para centavos (ex: 15,50)
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="data">Data *</label>
-            <input 
-              type="date" 
-              id="data" 
-              name="data" 
-              value="<?php echo date('Y-m-d'); ?>"
-              required
-            />
-            <div class="info-text">
-              <i class="fas fa-info-circle"></i> 
-              Data em que a despesa foi realizada
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="descricao">Descrição *</label>
-            <input 
-              type="text" 
-              id="descricao" 
-              name="descricao" 
-              placeholder="Ex: Almoço no shopping"
-              maxlength="255"
-              required
-            />
-            <div class="info-text">
-              <i class="fas fa-info-circle"></i> 
-              Breve descrição da despesa
-            </div>
+      <form action="NovaCategoria.php" method="POST" id="categoriaForm">
+        <div class="form-group">
+          <label for="nome">Nome da Categoria *</label>
+          <input 
+            type="text" 
+            id="nome" 
+            name="nome" 
+            placeholder="Ex: Alimentação, Transporte, Lazer..."
+            maxlength="50"
+            required
+          />
+          <div class="info-text">
+            <i class="fas fa-info-circle"></i> 
+            Digite um nome descritivo para a categoria
           </div>
         </div>
 
@@ -393,59 +358,57 @@ try {
             <i class="fas fa-times"></i> Cancelar
           </a>
           <button type="submit" class="btn-cadastrar">
-            <i class="fas fa-save"></i> Cadastrar Despesa
+            <i class="fas fa-save"></i> Criar Categoria
           </button>
         </div>
       </form>
+
+      <div class="categorias-existentes">
+        <h3><i class="fas fa-list"></i> Categorias Existentes</h3>
+        <div class="categorias-grid">
+          <?php if (empty($categorias)): ?>
+            <div class="categoria-item">Nenhuma categoria criada</div>
+          <?php else: ?>
+            <?php foreach ($categorias as $categoria): ?>
+              <div class="categoria-item">
+                <?php echo htmlspecialchars($categoria['nome']); ?>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
     // Validação do formulário
-    document.getElementById('despesaForm').addEventListener('submit', function(e) {
-      const categoria = document.getElementById('categoria').value;
-      const valor = document.getElementById('valor').value;
-      const data = document.getElementById('data').value;
-      const descricao = document.getElementById('descricao').value.trim();
+    document.getElementById('categoriaForm').addEventListener('submit', function(e) {
+      const nome = document.getElementById('nome').value.trim();
       
-      if (!categoria || !valor || !data || !descricao) {
+      if (!nome) {
         e.preventDefault();
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        alert('Por favor, insira o nome da categoria.');
         return false;
       }
       
-      if (parseFloat(valor) <= 0) {
+      if (nome.length < 3) {
         e.preventDefault();
-        alert('Por favor, insira um valor válido maior que zero.');
+        alert('O nome da categoria deve ter pelo menos 3 caracteres.');
         return false;
       }
       
-      if (descricao.length < 3) {
+      if (nome.length > 50) {
         e.preventDefault();
-        alert('A descrição deve ter pelo menos 3 caracteres.');
+        alert('O nome da categoria deve ter no máximo 50 caracteres.');
         return false;
       }
     });
 
-    // Formatação automática do valor
-    document.getElementById('valor').addEventListener('input', function(e) {
-      let value = e.target.value.replace(/[^\d,]/g, '');
-      value = value.replace(',', '.');
-      if (value.includes('.')) {
-        const parts = value.split('.');
-        if (parts[1].length > 2) {
-          parts[1] = parts[1].substring(0, 2);
-        }
-        value = parts[0] + '.' + parts[1];
-      }
-      e.target.value = value;
-    });
-
-    // Foco automático no primeiro campo
+    // Foco automático no campo
     document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('categoria').focus();
+      document.getElementById('nome').focus();
     });
   </script>
 </body>
 
-</html>
+</html> 

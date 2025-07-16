@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost'; // host
-$dbname = 'financas_que_salvam'; // nome do banco
+$dbname = 'financas'; // nome do banco
 $username = 'root'; // usuario
 $password = '';  // senha
 
@@ -10,12 +10,9 @@ try {
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "Conexão estabelecida com sucesso!";
-
 } catch (PDOException $e) {
-
-    echo "Erro na conexão: " . $e->getMessage();
-
+    error_log("Erro na conexão: " . $e->getMessage());
+    die("Erro na conexão com o banco de dados");
 }
 
 ?>

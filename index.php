@@ -6,12 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Finanças que Salvam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/tables.css">
+  <link rel="stylesheet" href="assets/css/alerts.css">
+  <link rel="stylesheet" href="assets/css/utilities.css">
   <script src="https://kit.fontawesome.com/a2d9d3f09f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <?php include './includes/header.php' ?>
+
+<?php if (isset($_GET['msg']) && $_GET['msg'] == 'logout_sucesso'): ?>
+  <div class="alert alert-success" style="margin: 20px;">
+    <i class="fas fa-check-circle"></i> Logout realizado com sucesso!
+  </div>
+<?php endif; ?>
+
   <!-- HERO -->
   <section class="hero" id="comecar">
     <div class="hero-content">
@@ -51,8 +61,9 @@
 </div>
 
 
-  <table class="tabela-despesas">
-    <thead>
+  <div class="tabela-container">
+    <table class="tabela-despesas">
+      <thead>
       <tr>
         <th>Data</th>
         <th>Categoria</th>
@@ -95,6 +106,7 @@
 </tbody>
 
   </table>
+  </div>
 </main>
 
   </section>

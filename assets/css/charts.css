@@ -1,0 +1,133 @@
+/* Gráficos CSS - Responsivo */
+
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: 20px 0;
+}
+
+.grafico-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.grafico-card h3 {
+  color: #1E90FF;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.chart-controls label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.chart-controls input[type="radio"] {
+  margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+  
+  .grafico-card {
+    padding: 15px;
+  }
+  
+  .grafico-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .chart-controls {
+    gap: 10px;
+  }
+  
+  .chart-controls label {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    height: 200px;
+  }
+  
+  .grafico-card {
+    padding: 12px;
+  }
+  
+  .grafico-card h3 {
+    font-size: 1rem;
+  }
+  
+  .chart-controls {
+    gap: 8px;
+  }
+  
+  .chart-controls label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .chart-container {
+    height: 180px;
+  }
+  
+  .grafico-card {
+    padding: 10px;
+  }
+  
+  .grafico-card h3 {
+    font-size: 0.9rem;
+  }
+  
+  .chart-controls {
+    gap: 6px;
+  }
+  
+  .chart-controls label {
+    font-size: 0.75rem;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .grafico-card {
+    transition: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .grafico-card {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .grafico-card h3 {
+    color: #74b9ff;
+  }
+  
+  .chart-controls label {
+    color: #e2e8f0;
+  }
+} 

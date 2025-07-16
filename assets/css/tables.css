@@ -1,0 +1,171 @@
+/* Tabelas CSS - Responsivo */
+
+.tabela-container {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tabela-despesas {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 600px; /* Garante largura mínima */
+}
+
+.tabela-despesas th,
+.tabela-despesas td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e1e5e9;
+  white-space: nowrap;
+}
+
+.tabela-despesas th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tabela-despesas tr:hover {
+  background-color: #f8f9fa;
+}
+
+.tabela-despesas tr:last-child td {
+  border-bottom: none;
+}
+
+.btn-editar,
+.btn-excluir {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 2px;
+  transition: background 0.3s ease;
+  color: #666;
+}
+
+.btn-editar {
+  color: #1E90FF;
+}
+
+.btn-editar:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+}
+
+.btn-excluir {
+  color: #e74c3c;
+}
+
+.btn-excluir:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tabela-container {
+    margin: 15px 0;
+  }
+  
+  .tabela-despesas {
+    font-size: 0.9rem;
+    min-width: 500px;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 10px 12px;
+  }
+  
+  /* Ocultar colunas menos importantes em mobile */
+  .tabela-despesas th:nth-child(2),
+  .tabela-despesas td:nth-child(2) {
+    display: none;
+  }
+  
+  .btn-editar,
+  .btn-excluir {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabela-despesas {
+    font-size: 0.8rem;
+    min-width: 400px;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 8px 10px;
+  }
+  
+  /* Ocultar mais colunas em telas muito pequenas */
+  .tabela-despesas th:nth-child(3),
+  .tabela-despesas td:nth-child(3) {
+    display: none;
+  }
+  
+  .btn-editar,
+  .btn-excluir {
+    padding: 5px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .tabela-despesas {
+    font-size: 0.75rem;
+    min-width: 350px;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 6px 8px;
+  }
+  
+  .btn-editar,
+  .btn-excluir {
+    padding: 4px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .btn-editar,
+  .btn-excluir {
+    transition: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .tabela-despesas {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .tabela-despesas th {
+    background-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .tabela-despesas tr:hover {
+    background-color: #4a5568;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    border-bottom-color: #4a5568;
+  }
+} 

@@ -1,0 +1,153 @@
+/* Header CSS - Responsivo */
+
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: #1E90FF;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.acoes-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.link-entrar {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.link-entrar:hover {
+  color: #1E90FF;
+  background-color: rgba(30, 144, 255, 0.1);
+}
+
+.btn-azul {
+  background-color: #1E90FF;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-azul:hover {
+  background-color: #1C86EE;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+  }
+  
+  .header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .acoes-header {
+    gap: 10px;
+  }
+  
+  .link-entrar,
+  .btn-azul {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header .container {
+    padding: 10px 15px;
+    gap: 12px;
+  }
+  
+  .header h1 {
+    font-size: 1.2rem;
+  }
+  
+  .acoes-header {
+    gap: 8px;
+  }
+  
+  .link-entrar,
+  .btn-azul {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .header .container {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  
+  .header h1 {
+    font-size: 1.1rem;
+  }
+  
+  .acoes-header {
+    gap: 6px;
+  }
+  
+  .link-entrar,
+  .btn-azul {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .link-entrar,
+  .btn-azul {
+    transition: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .header {
+    background-color: #2d3748;
+  }
+  
+  .header h1 {
+    color: #74b9ff;
+  }
+  
+  .link-entrar {
+    color: #e2e8f0;
+  }
+  
+  .link-entrar:hover {
+    color: #74b9ff;
+    background-color: rgba(116, 185, 255, 0.1);
+  }
+} 

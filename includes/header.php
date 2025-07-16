@@ -1,4 +1,5 @@
 <!-- HEADER -->
+<link rel="stylesheet" href="assets/css/header.css">
 <header class="header">
     <div class="container">
       <h1>Finanças que Salvam</h1>

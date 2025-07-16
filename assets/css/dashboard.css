@@ -1,0 +1,326 @@
+/* Dashboard CSS - Responsivo */
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.graficos-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.grafico-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.grafico-card h3 {
+  color: #1E90FF;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+
+.acoes-dashboard {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.btn-dashboard {
+  background-color: #3B82F6;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.btn-dashboard:hover {
+  background-color: #2563EB;
+}
+
+.btn-dashboard.verde {
+  background-color: #2ecc71;
+}
+
+.btn-dashboard.verde:hover {
+  background-color: #27ae60;
+}
+
+.btn-dashboard.vermelho {
+  background-color: #e74c3c;
+}
+
+.btn-dashboard.vermelho:hover {
+  background-color: #c0392b;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stat-card h4 {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1E90FF;
+}
+
+.stat-card.destaque .stat-value {
+  color: #2ecc71;
+}
+
+.stat-card.alerta .stat-value {
+  color: #e74c3c;
+}
+
+.welcome-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.welcome-section h1 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.welcome-section p {
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+}
+
+/* Tabela de Despesas */
+.tabela-despesas {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.tabela-despesas th,
+.tabela-despesas td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.tabela-despesas th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.tabela-despesas tr:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-editar,
+.btn-excluir {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 2px;
+  transition: background 0.3s ease;
+}
+
+.btn-editar {
+  color: #1E90FF;
+}
+
+.btn-editar:hover {
+  background-color: rgba(30, 144, 255, 0.1);
+}
+
+.btn-excluir {
+  color: #e74c3c;
+}
+
+.btn-excluir:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+  
+  .graficos-section {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 10px;
+  }
+  
+  .graficos-section {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .acoes-dashboard {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-dashboard {
+    justify-content: center;
+    padding: 15px 20px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .stat-card {
+    padding: 15px;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-section {
+    padding: 20px;
+  }
+  
+  .welcome-section h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tabela-despesas {
+    font-size: 0.9rem;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 8px 10px;
+  }
+  
+  /* Ocultar colunas menos importantes em mobile */
+  .tabela-despesas th:nth-child(2),
+  .tabela-despesas td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 5px;
+  }
+  
+  .grafico-card {
+    padding: 15px;
+  }
+  
+  .chart-container {
+    height: 250px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-value {
+    font-size: 1.3rem;
+  }
+  
+  .welcome-section {
+    padding: 15px;
+  }
+  
+  .welcome-section h1 {
+    font-size: 1.3rem;
+  }
+  
+  .tabela-despesas {
+    font-size: 0.8rem;
+  }
+  
+  .tabela-despesas th,
+  .tabela-despesas td {
+    padding: 6px 8px;
+  }
+  
+  /* Ocultar mais colunas em telas muito pequenas */
+  .tabela-despesas th:nth-child(3),
+  .tabela-despesas td:nth-child(3) {
+    display: none;
+  }
+}
+
+/* Melhorias para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .btn-dashboard,
+  .btn-editar,
+  .btn-excluir {
+    transition: none;
+  }
+}
+
+/* Modo escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  .grafico-card,
+  .stat-card,
+  .tabela-despesas {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .tabela-despesas th {
+    background-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .tabela-despesas tr:hover {
+    background-color: #4a5568;
+  }
+}
