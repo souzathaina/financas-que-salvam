@@ -28,19 +28,41 @@ const chartData = {
       'rgba(255, 205, 86, 1)',
       'rgba(153, 102, 255, 1)'
     ],
-    borderWidth: 1
+    borderWidth: 2
   }]
 };
 
 let chartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'bottom',
+      labels: {
+        padding: 15,
+        usePointStyle: true,
+        font: {
+          size: 12
+        }
+      }
     },
     title: {
       display: true,
-      text: 'Despesas por Categoria'
+      text: 'Despesas por Categoria',
+      font: {
+        size: 16,
+        weight: 'bold'
+      },
+      padding: {
+        top: 10,
+        bottom: 20
+      }
+    }
+  },
+  layout: {
+    padding: {
+      top: 20,
+      bottom: 20
     }
   }
 };
