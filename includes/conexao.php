@@ -1,17 +1,20 @@
 <?php
-$servidor = "financas-que-salvam";  
-$usuario = "root";        
-$senha = "";              
-$banco = "financas";
 
-$conexao = new mysqli($servidor, $usuario, $senha, $banco);
+$host = 'localhost'; // host
+$dbname = 'financas_que_salvam'; // nome do banco
+$username = 'root'; // usuario
+$password = '';  // senha
 
-if ($conexao->connect_error) {
-    die("Falha na conexão: " . $conexao->connect_error);
+try {
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+} catch (PDOException $e) {
+
+    echo "Erro na conexão: " . $e->getMessage();
+
 }
 
-$conexao->set_charset("utf8");
-
-// Em outros arquivos PHP do projeto, basta incluir o conexao.php com:
-// require_once 'conexao.php';
 ?>

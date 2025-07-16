@@ -16,8 +16,8 @@
     <div class="container">
       <h1>Finanças que Salvam</h1>
       <div class="acoes-header">
-        <a href="#dashboard" class="link-entrar">Entrar</a>
-        <a href="#comecar" class="btn-azul">Comece Agora</a>
+        <a href="./login.php" class="link-entrar">Entrar</a>
+        <a href="./cadastrarUsuForm.php" class="btn-azul">Comece Agora</a>
       </div>
     </div>
   </header>
@@ -27,7 +27,7 @@
     <div class="hero-content">
       <h2>Gaste com propósito. Economize com impacto.</h2>
       <h1>Finanças que Salvam</h1>
-      <a href="#dashboard" class="btn-azul btn-hero">Quero mudar agora</a>
+      <a href="./Login.php" class="btn-azul btn-hero">Quero mudar agora</a>
     </div>
   </section>
 
@@ -57,7 +57,7 @@
 
 <!-- Botão verde abaixo da tabela -->
 <div style="margin-top: 20px; display: flex; justify-content: center;">
-  <a href="index.php" class="btn-verde">Cadastrar Despesas</a>
+  <a href="cadastrar.php" class="btn-verde">Cadastrar Despesas</a>
 </div>
 
 
