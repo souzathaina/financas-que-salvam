@@ -1,15 +1,17 @@
 # 💰 Finanças que Salvam
 
-> **Sistema completo de controle financeiro pessoal com foco em sustentabilidade e conscientização**
+> **Sistema completo de controle financeiro pessoal com foco em sustentabilidade, usabilidade e visual moderno**
 
 [![PHP](https://img.shields.io/badge/PHP-8.0+-blue.svg)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)](https://mysql.com)
 [![Chart.js](https://img.shields.io/badge/Chart.js-4.0+-yellow.svg)](https://chartjs.org)
 [![FontAwesome](https://img.shields.io/badge/FontAwesome-6.0+-lightgrey.svg)](https://fontawesome.com)
+[![Inter](https://img.shields.io/badge/Font-Inter-lightgrey.svg)](https://fonts.google.com/specimen/Inter)
 
 ## 📋 Índice
 
 - [Sobre o Projeto](#-sobre-o-projeto)
+- [Novidades e Melhorias](#-novidades-e-melhorias)
 - [Funcionalidades](#-funcionalidades)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
@@ -22,107 +24,111 @@
 
 ## 🌱 Sobre o Projeto
 
-**Finanças que Salvam** é um sistema web completo para controle financeiro pessoal que vai além do simples registro de despesas. O projeto combina gestão financeira tradicional com conscientização ambiental, ajudando usuários a entenderem o impacto de seus gastos tanto no bolso quanto no planeta.
+**Finanças que Salvam** é um sistema web completo para controle financeiro pessoal, combinando gestão financeira tradicional com consciência ambiental e uma experiência visual moderna e responsiva.
 
-### 🎯 Objetivos
+## 🚀 Novidades e Melhorias
 
-- ✅ **Controle Financeiro**: Registro e categorização de despesas
-- ✅ **Análise Visual**: Gráficos interativos de gastos
-- ✅ **Conscientização**: Relacionamento entre gastos e impacto ambiental
-- ✅ **Simplicidade**: Interface intuitiva e responsiva
-- ✅ **Segurança**: Sistema de autenticação robusto
+- **Filtros dinâmicos no dashboard**: Filtre despesas por mês, ano e categoria, com atualização instantânea dos dados e gráficos.
+- **Novo gráfico "Gastos x Salário"**: Visualização independente, dinâmica e responsiva, atualizada via AJAX sem recarregar a página.
+- **Interface profissional e responsiva**: Todos os formulários e páginas seguem um padrão visual moderno, com a fonte 'Inter' e layout adaptável.
+- **Estrutura de arquivos aprimorada**: Arquivo de conexão movido para `includes/Connection.php` e organização otimizada.
+- **Experiência de usuário refinada**: Navegação intuitiva, feedback visual consistente e formulários com validação aprimorada.
 
 ## ✨ Funcionalidades
 
 ### 🔐 **Sistema de Autenticação**
-- **Cadastro de usuários** com validação completa
-- **Login seguro** com sessões PHP
-- **Logout** com destruição segura de sessão
-- **Validação de força de senha** em tempo real
-- **Verificação de email único** no cadastro
+- Cadastro e login de usuários com validação e segurança
+- Logout seguro
+- Validação de senha forte e email único
 
 ### 📊 **Dashboard Interativo**
-- **Visão geral financeira** com estatísticas rápidas
-- **Gráficos dinâmicos** usando Chart.js
-- **Comparação gastos vs salário** em tempo real
-- **Distribuição por categorias** com cores intuitivas
-- **Alertas visuais** para gastos excessivos
+- Visão geral financeira com estatísticas rápidas
+- **Filtros dinâmicos** (mês, ano, categoria)
+- **Gráficos dinâmicos** (incluindo "Gastos x Salário" e distribuição por categoria)
+- Alertas visuais para gastos excessivos
 
 ### 💸 **Gestão de Despesas**
-- **Cadastro de despesas** com categorização
-- **Edição e exclusão** de registros
-- **Categorias personalizáveis** pelo usuário
-- **Validação de dados** em tempo real
-- **Histórico completo** de transações
+- Cadastro, edição e exclusão de despesas
+- Categorias personalizáveis
+- Histórico completo de transações
 
 ### 📈 **Análise Financeira**
-- **Percentual gasto** do salário mensal
-- **Saldo restante** calculado automaticamente
-- **Tendências de gastos** por categoria
-- **Alertas de orçamento** quando necessário
-- **Relatórios visuais** interativos
+- Percentual gasto do salário mensal
+- Saldo restante automático
+- Tendências de gastos por categoria
+- Relatórios visuais interativos
 
 ### 🎨 **Interface Moderna**
 - **Design responsivo** para todos os dispositivos
-- **Paleta de cores** consistente e acessível
-- **Animações suaves** e feedback visual
-- **Ícones intuitivos** (FontAwesome)
-- **Tipografia legível** (Inter)
+- **Fonte 'Inter'** para máxima legibilidade
+- Paleta de cores consistente
+- Ícones intuitivos (FontAwesome)
 
 ## 🛠️ Tecnologias Utilizadas
 
 ### **Backend**
-- **PHP 8.0+** - Linguagem principal
-- **MySQL 8.0+** - Banco de dados
-- **PDO** - Conexão segura com banco
-- **Sessions** - Gerenciamento de sessões
+- PHP 8.0+
+- MySQL 8.0+
+- PDO
+- Sessions
 
 ### **Frontend**
-- **HTML5** - Estrutura semântica
-- **CSS3** - Estilização moderna
-- **JavaScript ES6+** - Interatividade
-- **Chart.js** - Gráficos interativos
-- **FontAwesome** - Ícones
+- HTML5
+- CSS3 (com organização em `assets/css/`)
+- JavaScript ES6+ (scripts em `assets/js/`)
+- Chart.js
+- FontAwesome
+- Google Fonts (Inter)
 
 ### **Ferramentas**
-- **XAMPP** - Ambiente de desenvolvimento
-- **Git** - Controle de versão
-- **VS Code** - Editor de código
+- XAMPP
+- Git
+- VS Code
 
 ## 📁 Estrutura do Projeto
 
 ```
 financas-que-salvam/
-├── 📁 assets/
-│   ├── 📁 js/
-│   │   └── graficos.js          # Scripts de gráficos
-│   └── 📁 css/
-│       └── cadastrar_despesas.css
-├── 📁 css/
-│   └── index.css                # Estilos principais
-├── 📁 includes/
-│   └── header.php               # Header reutilizável
-├── 📄 index.php                 # Página inicial
-├── 📄 dashboard.php             # Dashboard principal
-├── 📄 login.php                 # Página de login
-├── 📄 cadastrar.php             # Página de cadastro
-├── 📄 logout.php                # Sistema de logout
-├── 📄 configurar_salario.php    # Configuração de salário
-├── 📄 cadastrar_despesas.php    # Cadastro de despesas
-├── 📄 graficos.php              # Página de gráficos
-├── 📄 Connection.php            # Conexão com banco
-├── 📄 Login.php                 # Backend de login
-├── 📄 Signin.php                # Backend de cadastro
-├── 📄 NovaDespesa.php           # Backend de nova despesa
-├── 📄 EditarDespesa.php         # Backend de edição
-├── 📄 DeletarDespesa.php        # Backend de exclusão
-├── 📄 NovaCategoria.php         # Backend de categorias
-├── 📄 UsuarioDashboard.php      # Dashboard do usuário
-├── 📄 financas.sql              # Estrutura do banco
-├── 📄 adicionar_salario.sql     # Script para coluna salário
-├── 📄 README_DASHBOARD.md       # Documentação da dashboard
-├── 📄 README_LOGIN.md           # Documentação do login
-└── 📄 README.md                 # Este arquivo
+├── assets/
+│   ├── js/
+│   │   ├── graficos.js           # Scripts de gráficos gerais
+│   │   └── graficoPesquisa.js    # Script do gráfico "Gastos x Salário" (dinâmico)
+│   └── css/
+│       ├── alerts.css
+│       ├── buttons.css
+│       ├── cadastrar_despesas.css
+│       ├── charts.css
+│       ├── dashboard.css
+│       ├── forms.css
+│       ├── header.css
+│       ├── index.css
+│       ├── tables.css
+│       └── utilities.css
+├── includes/
+│   ├── Connection.php            # Conexão com banco (novo caminho)
+│   ├── conexao.php
+│   ├── footer.php
+│   ├── header.php
+│   └── usuarioDashboard.php
+├── index.php
+├── dashboard.php
+├── login.php
+├── cadastrar.php
+├── logout.php
+├── configurar_salario.php
+├── cadastrar_despesas.php
+├── cadastrar_categoria.php
+├── editar_despesa.php
+├── editar_usuario.php
+├── editar.php
+├── graficos.php
+├── NovaCategoria.php
+├── NovaDespesa.php
+├── EditarDespesa.php
+├── DeletarDespesa.php
+├── UsuarioDashboard.php
+├── financas.sql
+└── README.md
 ```
 
 ## 🚀 Instalação
@@ -149,13 +155,10 @@ financas-que-salvam/
    ```sql
    -- Execute o arquivo financas.sql
    mysql -u root -p < financas.sql
-   
-   -- Execute o script para adicionar coluna salário
-   mysql -u root -p financas < adicionar_salario.sql
    ```
 
 4. **Configure a conexão**
-   - Edite `Connection.php` com suas credenciais
+   - Edite `includes/Connection.php` com suas credenciais
    ```php
    $host = 'localhost';
    $dbname = 'financas';
@@ -209,144 +212,59 @@ CREATE TABLE despesas (
 
 ### **Configurações de Segurança**
 
-- **Sessões PHP** configuradas para segurança
-- **Prepared statements** para prevenir SQL injection
-- **Hash de senhas** com `password_hash()`
-- **Validação de entrada** em todos os formulários
+- Sessões PHP configuradas para segurança
+- Prepared statements para prevenir SQL injection
+- Hash de senhas com `password_hash()`
+- Validação de entrada em todos os formulários
 
 ## 📖 Como Usar
 
 ### **Primeiro Acesso**
 
-1. **Acesse a página inicial**
-   - Vá para `http://localhost/financas-que-salvam`
-
-2. **Crie sua conta**
-   - Clique em "Comece Agora"
-   - Preencha seus dados
-   - Crie uma senha forte
-
-3. **Configure seu salário**
-   - Na dashboard, clique em "Configurar Salário"
-   - Insira seu salário mensal
-
-4. **Comece a usar**
-   - Cadastre suas primeiras despesas
-   - Explore os gráficos
-   - Monitore seus gastos
+1. Acesse a página inicial: `http://localhost/financas-que-salvam`
+2. Crie sua conta e configure seu salário
+3. Cadastre suas despesas e categorias
+4. Use os filtros do dashboard para analisar seus gastos
+5. Visualize os gráficos dinâmicos e monitore seu orçamento
 
 ### **Uso Diário**
 
-#### **Cadastrar Despesa**
-1. Acesse a dashboard
-2. Clique em "Nova Despesa"
-3. Preencha: valor, categoria, data, descrição
-4. Clique em "Cadastrar Despesa"
+- Cadastre, edite e exclua despesas facilmente
+- Use filtros para visualizar gastos por período e categoria
+- Analise gráficos dinâmicos e relatórios visuais
+- Gerencie categorias conforme sua necessidade
 
-#### **Ver Gráficos**
-1. Na dashboard, visualize os gráficos automáticos
-2. Para gráficos detalhados, clique em "Gráficos Detalhados"
-3. Escolha entre diferentes tipos de visualização
+### **Destaques Visuais**
 
-#### **Gerenciar Categorias**
-1. Clique em "Nova Categoria"
-2. Digite o nome da categoria
-3. Salve para usar em despesas
-
-#### **Editar/Excluir**
-1. Na tabela de despesas, use os botões de ação
-2. Editar: modifica os dados da despesa
-3. Excluir: remove permanentemente
-
-### **Análise Financeira**
-
-#### **Dashboard Principal**
-- **Total Gasto**: Soma de todas as despesas
-- **Salário Mensal**: Valor configurado pelo usuário
-- **Percentual Gasto**: Relação gastos/salário
-- **Saldo Restante**: Salário - gastos
-
-#### **Gráficos Disponíveis**
-- **Despesas por Categoria**: Distribuição percentual
-- **Gastos vs Salário**: Comparação visual
-- **Tendências Temporais**: Evolução dos gastos
+- Todos os formulários e páginas seguem um padrão visual moderno, com a fonte 'Inter' e layout responsivo
+- Filtros e botões estilizados para melhor experiência
+- Gráficos atualizados em tempo real conforme os filtros
 
 ## 🔧 API e Backend
 
 ### **Endpoints Principais**
 
-#### **Autenticação**
-- `POST /Login.php` - Autenticação de usuário
-- `POST /Signin.php` - Cadastro de novo usuário
-- `GET /logout.php` - Encerramento de sessão
-
-#### **Despesas**
 - `POST /NovaDespesa.php` - Criar nova despesa
 - `POST /EditarDespesa.php` - Editar despesa existente
 - `POST /DeletarDespesa.php` - Excluir despesa
-
-#### **Categorias**
 - `POST /NovaCategoria.php` - Criar nova categoria
-
-#### **Configurações**
 - `POST /configurar_salario.php` - Atualizar salário
-
-### **Estrutura de Resposta**
-
-#### **Sucesso**
-```php
-header("Location: ./dashboard.php?sucesso=1");
-```
-
-#### **Erro**
-```php
-header("Location: ./login.php?sucesso=0&erro=tipo_erro");
-```
-
-### **Tipos de Erro**
-- `campos_vazios` - Campos obrigatórios não preenchidos
-- `credenciais_invalidas` - Email ou senha incorretos
-- `email_em_uso` - Email já cadastrado
-- `email_invalido` - Formato de email inválido
-- `dominio_invalido` - Domínio de email inválido
-- `erro_interno` - Erro interno do servidor
+- `POST /Signin.php` - Cadastro de novo usuário
+- `POST /Login.php` - Autenticação de usuário
+- `GET /logout.php` - Encerramento de sessão
 
 ## 🤝 Contribuição
 
-### **Como Contribuir**
-
-1. **Fork o projeto**
-2. **Crie uma branch** para sua feature
-   ```bash
-   git checkout -b feature/NovaFuncionalidade
-   ```
-3. **Commit suas mudanças**
-   ```bash
-   git commit -m 'Adiciona nova funcionalidade'
-   ```
-4. **Push para a branch**
-   ```bash
-   git push origin feature/NovaFuncionalidade
-   ```
-5. **Abra um Pull Request**
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit e push das mudanças
+4. Abra um Pull Request
 
 ### **Padrões de Código**
-
-- **PHP**: PSR-12
-- **JavaScript**: ES6+
-- **CSS**: BEM methodology
-- **HTML**: Semantic markup
-
-### **Funcionalidades Sugeridas**
-
-- [ ] **Metas de economia** mensais
-- [ ] **Alertas de gastos** excessivos
-- [ ] **Exportação de relatórios** em PDF
-- [ ] **Integração com bancos** via API
-- [ ] **Modo escuro** na interface
-- [ ] **Notificações push** para lembretes
-- [ ] **Backup automático** dos dados
-- [ ] **Multi-idioma** (português/inglês)
+- PHP: PSR-12
+- JavaScript: ES6+
+- CSS: BEM methodology
+- HTML: Semantic markup
 
 ## 📄 Licença
 
@@ -358,19 +276,19 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 
 ## 🙏 Agradecimentos
 
-- **Chart.js** - Gráficos interativos
-- **FontAwesome** - Ícones
-- **Google Fonts** - Tipografia Inter
-- **XAMPP** - Ambiente de desenvolvimento
+- Chart.js
+- FontAwesome
+- Google Fonts (Inter)
+- XAMPP
 
 ## 📞 Suporte
 
-- **Email**: seu-email@exemplo.com
-- **Issues**: [GitHub Issues](https://github.com/seu-usuario/financas-que-salvam/issues)
-- **Documentação**: [Wiki do Projeto](https://github.com/seu-usuario/financas-que-salvam/wiki)
+- Email: seu-email@exemplo.com
+- Issues: [GitHub Issues](https://github.com/seu-usuario/financas-que-salvam/issues)
+- Documentação: [Wiki do Projeto](https://github.com/seu-usuario/financas-que-salvam/wiki)
 
 ---
 
 **⭐ Se este projeto te ajudou, considere dar uma estrela no repositório!**
 
-**🌱 Finanças que Salvam - Controle financeiro com consciência ambiental**
+**🌱 Finanças que Salvam - Controle financeiro com consciência ambiental e visual moderno**
