@@ -34,8 +34,8 @@ try {
 } catch (PDOException $e) {
   echo "<script> alert('Erro ao carregar salario: $e')</script>";
 }
-$categoriaMaisGasta = $despesa['nome_categoria'];
-$valorCategoriaMaisGasta = $despesa['valor_despesa'];
+$categoriaMaisGasta = $despesa['nome_categoria'] ?? '';
+$valorCategoriaMaisGasta = $despesa['valor_despesa'] ?? '';
 
 function sugestaoAlternativa($valor)
 {
@@ -86,6 +86,16 @@ $mensagens = [
     "Tente priorizar gastos que tragam retorno a longo prazo. Os 'outros' podem estar te sabotando.",
     "Gastos diversos merecem atenção. Está tudo mesmo valendo o que custou?",
     "Organize os 'outros' gastos para entender onde está o furo no orçamento."
+  ],
+  'Contas' => [
+    "Contas são necessárias, mas será que não dá pra renegociar ou economizar em alguma?",
+    "Revise suas contas fixas. Pequenas economias mensais viram grandes valores no ano.",
+    "As contas pagam o funcionamento da vida, mas cuide para não viver só pra pagá-las."
+  ],
+  'Vestuário' => [
+    "Estar na moda é legal, mas seu bolso precisa acompanhar o estilo também! 👗💸",
+    "Será que precisava mesmo daquela 5ª camiseta preta? Reflita antes da próxima compra! 🛍️",
+    "Investir em roupas é válido, mas um guarda-roupa inteligente vale mais que um lotado. 👚🧠"
   ]
 ];
 
@@ -113,7 +123,7 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
   <link rel="stylesheet" href="assets/css/buttons.css">
   <link rel="stylesheet" href="assets/css/alerts.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Zz6s+dFJh+1Ep9J3JYrDgAGru+gN0TADxVONMdx7FMXwqGlBSx1cAOUvfdPhcRQZaDP47JjeetPjqDnL7Axgdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -136,26 +146,28 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
         <i class="fas fa-check-circle"></i> Salário atualizado com sucesso!
       </div>
     <?php endif; ?>
-    
+
     <?php if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1' && isset($_GET['msg']) && $_GET['msg'] == 'despesa_atualizada'): ?>
       <div class="alert alert-success">
         <i class="fas fa-check-circle"></i> Despesa atualizada com sucesso!
       </div>
     <?php endif; ?>
-    
+
     <?php if (isset($_GET['sucesso']) && $_GET['sucesso'] == '1' && isset($_GET['msg']) && $_GET['msg'] == 'perfil_atualizado'): ?>
       <div class="alert alert-success">
         <i class="fas fa-check-circle"></i> Perfil atualizado com sucesso!
       </div>
     <?php endif; ?>
-    
+
     <!-- SEÇÃO DE BOAS-VINDAS -->
     <section class="welcome-section">
       <h1>Bem-vindo ao seu Dashboard Financeiro!</h1>
       <p>Monitore seus gastos e mantenha suas finanças em ordem.</p>
       <br>
-      <p>Você mais gastou esse mes em: <?php echo $categoriaMaisGasta ?>! </p>
-      <h1> <?php echo $mensagemImpacto ?> </h1>
+      <?php if (!empty($categoriaMaisGasta)): ?>
+        <p>Você mais gastou esse mes em: <?php echo $categoriaMaisGasta ?>! </p>
+        <h1> <?php echo $mensagemImpacto ?> </h1>
+      <?php endif; ?>
     </section>
 
     <!-- AÇÕES RÁPIDAS -->
@@ -184,17 +196,17 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
         <h4>Total Gasto</h4>
         <div class="stat-value">R$ <?php echo number_format($totalGasto, 2, ',', '.'); ?></div>
       </div>
-      
+
       <div class="stat-card">
         <h4>Salário Mensal</h4>
         <div class="stat-value">R$ <?php echo number_format($salario, 2, ',', '.'); ?></div>
       </div>
-      
+
       <div class="stat-card <?php echo $percentualGasto > 80 ? 'alerta' : 'destaque'; ?>">
         <h4>Percentual Gasto</h4>
         <div class="stat-value"><?php echo number_format($percentualGasto, 1); ?>%</div>
       </div>
-      
+
       <div class="stat-card destaque">
         <h4>Saldo Restante</h4>
         <div class="stat-value">R$ <?php echo number_format($saldoRestante, 2, ',', '.'); ?></div>
@@ -214,7 +226,7 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
           <label><input type="radio" name="chartType" value="pie"> Pizza</label>
         </div>
       </div>
-      
+
       <div class="grafico-card">
         <h3>Gastos vs Salário</h3>
         <!-- Formulário de filtro para o gráfico Gastos vs Salário -->
@@ -224,13 +236,22 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
             <select name="mes" id="mes-pesquisa" class="input-filtro">
               <option value="">Todos</option>
               <?php
-                $meses = [
-                  '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril',
-                  '05' => 'Maio', '06' => 'Junho', '07' => 'Julho', '08' => 'Agosto',
-                  '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
-                ];
-                foreach ($meses as $num => $nome): ?>
-                  <option value="<?= $num ?>"><?= $nome ?></option>
+              $meses = [
+                '01' => 'Janeiro',
+                '02' => 'Fevereiro',
+                '03' => 'Março',
+                '04' => 'Abril',
+                '05' => 'Maio',
+                '06' => 'Junho',
+                '07' => 'Julho',
+                '08' => 'Agosto',
+                '09' => 'Setembro',
+                '10' => 'Outubro',
+                '11' => 'Novembro',
+                '12' => 'Dezembro'
+              ];
+              foreach ($meses as $num => $nome): ?>
+                <option value="<?= $num ?>"><?= $nome ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -239,8 +260,8 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
             <select name="ano" id="ano-pesquisa" class="input-filtro">
               <option value="">Todos</option>
               <?php $anoAtual = date('Y');
-                for ($i = $anoAtual; $i >= $anoAtual - 5; $i--): ?>
-                  <option value="<?= $i ?>"><?= $i ?></option>
+              for ($i = $anoAtual; $i >= $anoAtual - 5; $i--): ?>
+                <option value="<?= $i ?>"><?= $i ?></option>
               <?php endfor; ?>
             </select>
           </div>
@@ -249,17 +270,17 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
             <select name="categoria_id" id="categoria-pesquisa" class="input-filtro">
               <option value="">Todas</option>
               <?php
-                // Buscar categorias para o filtro
-                try {
-                  $sqlCat = 'SELECT id, nome FROM categorias ORDER BY nome';
-                  $stmtCat = $pdo->prepare($sqlCat);
-                  $stmtCat->execute();
-                  $categoriasFiltro = $stmtCat->fetchAll(PDO::FETCH_ASSOC);
-                } catch (PDOException $e) {
-                  $categoriasFiltro = [];
-                }
-                foreach ($categoriasFiltro as $categoria): ?>
-                  <option value="<?= htmlspecialchars($categoria['id']) ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
+              // Buscar categorias para o filtro
+              try {
+                $sqlCat = 'SELECT id, nome FROM categorias ORDER BY nome';
+                $stmtCat = $pdo->prepare($sqlCat);
+                $stmtCat->execute();
+                $categoriasFiltro = $stmtCat->fetchAll(PDO::FETCH_ASSOC);
+              } catch (PDOException $e) {
+                $categoriasFiltro = [];
+              }
+              foreach ($categoriasFiltro as $categoria): ?>
+                <option value="<?= htmlspecialchars($categoria['id']) ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -274,7 +295,7 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
     <!-- TABELA DE DESPESAS -->
     <section>
       <h2 style="margin-bottom: 20px; color: #1E90FF;">Minhas Despesas Recentes</h2>
-      
+
       <?php if (empty($despesas)): ?>
         <div style="text-align: center; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
           <i class="fas fa-receipt" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
@@ -286,35 +307,35 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
         <div class="tabela-container">
           <table class="tabela-despesas">
             <thead>
-            <tr>
-              <th>Data</th>
-              <th>Categoria</th>
-              <th>Descrição</th>
-              <th>Valor</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($despesas as $despesa): ?>
-            <tr>
-              <td><?php echo date('d/m/Y', strtotime($despesa['data'])); ?></td>
-              <td><?php echo htmlspecialchars($despesa['categoria_nome'] ?? 'Sem categoria'); ?></td>
-              <td><?php echo htmlspecialchars($despesa['descricao']); ?></td>
-              <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
-              <td>
-                <button class="btn-editar" onclick="editarDespesa(<?php echo $despesa['id']; ?>)">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn-excluir" onclick="deletarDespesa(<?php echo $despesa['id']; ?>)">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </td>
-            </tr>
-            <?php endforeach; ?>
-                      </tbody>
+              <tr>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($despesas as $despesa): ?>
+                <tr>
+                  <td><?php echo date('d/m/Y', strtotime($despesa['data'])); ?></td>
+                  <td><?php echo htmlspecialchars($despesa['categoria_nome'] ?? 'Sem categoria'); ?></td>
+                  <td><?php echo htmlspecialchars($despesa['descricao']); ?></td>
+                  <td>R$ <?php echo number_format($despesa['valor'], 2, ',', '.'); ?></td>
+                  <td>
+                    <button class="btn-editar" onclick="editarDespesa(<?php echo $despesa['id']; ?>)">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-excluir" onclick="deletarDespesa(<?php echo $despesa['id']; ?>)">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
           </table>
         </div>
-        <?php endif; ?>
+      <?php endif; ?>
     </section>
   </div>
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 
 // Valores recebidos do form
 $nome = $_POST['nome'] ?? '';
@@ -54,7 +54,7 @@ try {
     $usuario_id = $pdo->lastInsertId();
     $_SESSION['usuario_id'] = $usuario_id;
 
-    header("Location: ./dashboard.php?sucesso=1");
+    header("Location: ./index.php?sucesso=1");
     exit();
 } catch (PDOException $e) {
     error_log("Erro no cadastro: " . $e->getMessage());

@@ -1,39 +1,39 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 
 // Processamento do login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
-    $senha = $_POST['senha'] ?? '';
+  $email = $_POST['email'] ?? '';
+  $senha = $_POST['senha'] ?? '';
 
-    if (empty($email) || empty($senha)) {
-        header('Location: Login.php?sucesso=0&erro=campos_vazios');
+  if (empty($email) || empty($senha)) {
+    header('Location: Login.php?sucesso=0&erro=campos_vazios');
+    exit();
+  }
+
+  try {
+    $sql = 'SELECT id, senha FROM usuarios WHERE email = :email';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($usuario) {
+      // Verifica hash ou texto plano
+      if (password_verify($senha, $usuario['senha']) || $senha === $usuario['senha']) {
+        $_SESSION['usuario_id'] = $usuario['id'];
+        header('Location: dashboard.php');
         exit();
+      }
     }
-
-    try {
-        $sql = 'SELECT id, senha FROM usuarios WHERE email = :email';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([':email' => $email]);
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($usuario) {
-            // Verifica hash ou texto plano
-            if (password_verify($senha, $usuario['senha']) || $senha === $usuario['senha']) {
-                $_SESSION['usuario_id'] = $usuario['id'];
-                header('Location: dashboard.php');
-                exit();
-            }
-        }
-        // Credenciais inválidas
-        header('Location: Login.php?sucesso=0&erro=credenciais_invalidas');
-        exit();
-    } catch (PDOException $e) {
-        error_log('Erro no login: ' . $e->getMessage());
-        header('Location: Login.php?sucesso=0&erro=erro_interno');
-        exit();
-    }
+    // Credenciais inválidas
+    header('Location: Login.php?sucesso=0&erro=credenciais_invalidas');
+    exit();
+  } catch (PDOException $e) {
+    error_log('Erro no login: ' . $e->getMessage());
+    header('Location: Login.php?sucesso=0&erro=erro_interno');
+    exit();
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -81,6 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               case 'erro_interno':
                 $erro = 'Erro interno do servidor. Tente novamente.';
                 break;
+              case 'nao_logado':
+                $erro = 'Usuario deve estar logado para isso!';
+                break;
               default:
                 $erro = 'Ocorreu um erro. Tente novamente.';
             }
@@ -95,14 +98,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label for="email">Email</label>
           <div class="input-icon">
             <i class="fas fa-envelope"></i>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
+            <input
+              type="email"
+              id="email"
+              name="email"
               placeholder="seu@email.com"
               required
-              autocomplete="email"
-            />
+              autocomplete="email" />
           </div>
         </div>
 
@@ -110,14 +112,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label for="senha">Senha</label>
           <div class="input-icon">
             <i class="fas fa-lock"></i>
-            <input 
-              type="password" 
-              id="senha" 
-              name="senha" 
+            <input
+              type="password"
+              id="senha"
+              name="senha"
               placeholder="Sua senha"
               required
-              autocomplete="current-password"
-            />
+              autocomplete="current-password" />
             <button type="button" class="password-toggle" onclick="togglePassword()">
               <i class="fas fa-eye" id="eyeIcon"></i>
             </button>
