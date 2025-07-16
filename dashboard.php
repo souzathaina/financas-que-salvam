@@ -95,9 +95,9 @@ if (isset($_GET['status'])) {
                     <p class="valor">R$ <?= number_format($totalGastoMes, 2, ',', '.') ?></p>
                 </div>
                 <div class="card destaque">
-                    <h3>Impacto evitado</h3>
-                    <p class="valor">🌱 23 kg de CO₂</p>
-                    <small>Ao economizar em transporte e plástico</small>
+                    <h3>Gráficos de gastos</h3>
+                    <p class="valor"></p>
+                    <small>Gráficos de comparação de Gastos/Ganhos</small>
                 </div>
             </div>
 
