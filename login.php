@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 
 // Processamento do login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

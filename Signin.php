@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 
 // Valores recebidos do form
 $nome = $_POST['nome'] ?? '';

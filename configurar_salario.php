@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
@@ -64,14 +64,10 @@ try {
 
 <body>
   <!-- HEADER -->
-  <header class="header">
-    <div class="container">
-      <h1>Finanças que Salvam</h1>
-      <div class="acoes-header">
-        <a href="dashboard.php" class="link-entrar">Voltar ao Dashboard</a>
-      </div>
-    </div>
-  </header>
+<a href="dashboard.php" class="voltar-link">
+    <i class="fas fa-arrow-left"></i>
+    Voltar ao Dashboard
+  </a>
 
   <div class="config-container">
     <h1><i class="fas fa-cog"></i> Configurar Salário Mensal</h1>

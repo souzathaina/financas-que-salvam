@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="assets/css/tables.css">
   <link rel="stylesheet" href="assets/css/alerts.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
-  <script src="https://kit.fontawesome.com/a2d9d3f09f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/sobre.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -107,9 +109,35 @@
 
   </table>
   </div>
-</main>
   </section>
+
+  <!-- SEÇÃO SOBRE -->
+
+<section id="sobre" class="secao-sobre animar">
+<h2 id="titulo-principal" class="animar">👥 Quem Somos</h2>
+<p id="texto-principal" class="animar">
+Somos uma equipe apaixonada por transformar vidas por meio da <strong>educação financeira</strong>. Acreditamos
+que o conhecimento empodera e pode tirar pessoas do ciclo da dívida, oferecendo novas possibilidades para o
+futuro.
+</p>
+
+<div class="carrossel" id="carrossel">
+<div class="slides" id="slides">
+<img src="assets/img/carrossel1.png" alt="Equipe de educadores financeiros">
+<img src="assets/img/carrossel2.png" alt="Oficinas de educação financeira">
+<img src="assets/img/carrossel3.png" alt="Símbolo de crescimento e esperança">
+</div>
+</div>
+
+<div class="botoes" id="botoes">
+<button onclick="mudarSlide(0)" class="ativo" aria-label="Slide 1"></button>
+<button onclick="mudarSlide(1)" aria-label="Slide 2"></button>
+<button onclick="mudarSlide(2)" aria-label="Slide 3"></button>
+</div>
+</section>
   <?php include 'includes/footer.php'; ?>
+</main>
+<script src="assets/js/carrossel.js"></script>
 </body>
 
 </html>

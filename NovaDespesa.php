@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './Connection.php';
+include './includes/Connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
@@ -72,6 +72,3 @@ try {
     exit();
 }
 ?>
-
-
-// alterar os valores de destino dos headers!!!!

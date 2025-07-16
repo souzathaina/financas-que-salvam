@@ -1,0 +1,178 @@
+/* FUNDO COM IMAGEM E DESFOQUE */
+body {
+margin: 0;
+font-family: 'Inter', sans-serif;
+color: #333;
+position: relative;
+z-index: 0;
+}
+
+body::before {
+content: "";
+position: fixed;
+top: 0; left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to bottom, #d0f0fd 0%, #ffffff 100%);
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+filter: blur(8px);
+z-index: -1;
+}
+
+/* CONTAINER CENTRAL DA SEÇÃO SOBRE */
+.secao-sobre {
+background-color: rgba(255, 255, 255, 0.93);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+border-radius: 14px;
+padding: 40px;
+max-width: 960px;
+margin: 60px auto;
+text-align: center;
+/* Removida animação fixa para evitar conflito */
+}
+
+/* TÍTULO DA SEÇÃO */
+.secao-sobre h2 {
+font-size: 2rem;
+color: #1E90FF;
+margin-bottom: 20px;
+text-shadow: 0 1px 2px #cce5ff;
+border-left: 5px solid #1E90FF;
+padding-left: 12px;
+text-align: left;
+letter-spacing: normal; /* remove espaçamento extra */
+}
+
+/* PARÁGRAFO DA SEÇÃO */
+.secao-sobre p {
+font-size: 1.15rem;
+line-height: 1.6;
+color: #222;
+margin-bottom: 30px;
+text-align: justify;
+letter-spacing: normal; /* remove espaçamento extra */
+}
+
+/* IMAGEM DESTAQUE */
+.imagem-destaque {
+position: relative;
+width: 100%;
+max-width: 960px;
+height: 280px;
+overflow: hidden;
+margin: 30px auto;
+border-radius: 12px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.imagem-destaque img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+filter: brightness(0.9);
+transition: transform 0.5s ease;
+}
+
+.imagem-destaque:hover img {
+transform: scale(1.05) rotate(0.5deg);
+filter: brightness(1);
+}
+
+/* LEGENDA SOBRE IMAGEM */
+.legenda-fumaca {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to top right, rgba(255,255,255,0.7), rgba(255,255,255,0) 60%);
+display: flex;
+align-items: flex-end;
+padding: 30px 50px;
+box-sizing: border-box;
+pointer-events: none;
+}
+
+.legenda-fumaca p {
+font-size: 1.3em;
+font-weight: 700;
+color: #004a8f;
+text-shadow: 1px 1px 4px rgba(255,255,255,0.85);
+margin: 0;
+max-width: 60%;
+line-height: 1.2;
+}
+
+/* CARROSSEL */
+.carrossel {
+position: relative;
+width: 100%;
+max-width: 800px;
+height: 300px;
+margin: 0 auto;
+overflow: hidden;
+border-radius: 12px;
+box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.carrossel .slides {
+display: flex;
+width: 300%;
+height: 100%;
+transition: transform 0.6s ease-in-out;
+}
+
+.carrossel img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* BOTÕES DO CARROSSEL */
+.botoes {
+display: flex;
+justify-content: center;
+margin-top: 15px;
+gap: 10px;
+}
+
+.botoes button {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+border: none;
+background-color: #ccc;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.botoes button.ativo,
+.botoes button:hover {
+background-color: #0077cc;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeSlideZoom {
+0% {
+opacity: 0;
+transform: translateX(40px) scale(0.95);
+}
+100% {
+opacity: 1;
+transform: translateX(0) scale(1);
+}
+}
+
+/* Classes para reaplicar animação a cada troca no JS */
+.animar-titulo {
+animation: fadeSlideZoom 0.8s ease forwards;
+}
+
+.animar-texto {
+animation: fadeSlideZoom 0.8s ease forwards;
+}
