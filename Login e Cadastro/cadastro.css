@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1b1b1b;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+/* Estilo da caixa de cadastro (igual à login-box) */
+.cadastro-box {
+  position: relative;
+  background-color: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  border: 1px solid #3B82F6;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  width: 100%;
+  max-width: 360px;
+  color: #1b1b1b;
+  transition: all 0.3s ease;
+}
+
+.cadastro-box h2 {
+  margin-bottom: 25px;
+  color: #3B82F6;
+  font-size: 1.8rem;
+}
+
+.cadastro-box form {
+  width: 100%;
+}
+
+.cadastro-box label {
+  display: block;
+  text-align: left;
+  margin: 12px 0 6px;
+  font-weight: 500;
+}
+
+.cadastro-box input[type="text"],
+.cadastro-box input[type="email"],
+.cadastro-box input[type="password"],
+.cadastro-box input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccd5e1;
+  border-radius: 8px;
+  background-color: #e6edf7;
+  color: #1b1b1b;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+.cadastro-box input:focus {
+  border-color: #3B82F6;
+  outline: none;
+}
+
+.cadastro-box button {
+  width: 100%;
+  background-color: #1E90FF;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cadastro-box button:hover {
+  background-color: #1C86EE;
+}
+
+.register-text {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.register-text a {
+  color: #3B82F6;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+.voltar {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  text-decoration: none;
+  color: #1E90FF;
+  background-color: transparent;
+  font-size: 26px;
+  border-radius: 50%;
+  padding: 6px 10px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.voltar:hover {
+  background-color: #e6edf7;
+  color: #1C86EE;
+}
+
+.voltar.mobile {
+  display: none;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 24px;
+  color: #1E90FF;
+}
+
+@media (max-width: 768px) {
+  .cadastro-box {
+    padding: 32px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  label,
+  input,
+  button,
+  .register-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .cadastro-box {
+    width: 90vw;
+    padding: 28px;
+  }
+
+  .voltar {
+    display: none;
+  }
+
+  .voltar.mobile {
+    display: block;
+  }
+
+  .cadastro-box h2 {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cadastro-box {
+    padding: 24px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .register-text {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 320px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+}

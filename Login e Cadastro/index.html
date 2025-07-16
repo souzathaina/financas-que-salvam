@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finanças que Salvam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="sobre.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <h1>Finanças que Salvam</h1>
+      <button class="menu-toggle" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
+
+      <nav class="nav-links">
+        <a href="#comecar">Início</a>
+        <a href="#dashboard">Minhas Despesas</a>
+        <a href="#sobre">Sobre</a>
+      </nav>
+
+      <div class="acoes-header">
+        <a href="#dashboard" class="link-entrar">Entrar</a>
+        <a href="#comecar" class="btn-azul">Comece Agora</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="comecar">
+    <div class="hero-content">
+      <h2>Gaste com propósito. Economize com impacto.</h2>
+      <h1>Finanças que Salvam</h1>
+      <a href="#dashboard" class="btn-azul btn-hero">Quero mudar agora</a>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="dashboard" id="dashboard">
+    <main class="main-content">
+      <h1>Olá, jovem consciente!</h1>
+      <p>Veja como seus gastos afetam seu bolso e o planeta.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Total gasto no mês</h3>
+          <p class="valor">R$ 1.250,00</p>
+        </div>
+        <div class="card destaque">
+          <h3>Impacto evitado</h3>
+          <p class="valor">🌱 23 kg de CO₂</p>
+          <small>Ao economizar em transporte e plástico</small>
+        </div>
+      </div>
+
+      <h2 style="margin-top: 40px; text-align: center;">Minhas Despesas</h2>
+
+      <div style="margin-top: 20px; display: flex; justify-content: center;">
+        <a href="cadastrar_despesas.php" class="btn-verde">Cadastrar Despesas</a>
+      </div>
+
+      <div class="tabela-wrapper">
+        <table class="tabela-despesas">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Categoria</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>05/07/2025</td>
+              <td>Alimentação</td>
+              <td>Almoço caseiro (marmita)</td>
+              <td>R$ 32,00</td>
+              <td>
+                <button class="btn-editar" title="Editar"><i class="fas fa-edit"></i></button>
+                <button class="btn-excluir" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>07/07/2025</td>
+              <td>Transporte</td>
+              <td>Ônibus para o trabalho</td>
+              <td>R$ 62,60</td>
+              <td>
+                <button class="btn-editar" title="Editar"><i class="fas fa-edit"></i></button>
+                <button class="btn-excluir" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>10/07/2025</td>
+              <td>Lazer</td>
+              <td>Passeio no parque</td>
+              <td>R$ 50,00</td>
+              <td>
+                <button class="btn-editar" title="Editar"><i class="fas fa-edit"></i></button>
+                <button class="btn-excluir" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="secao-sobre animar">
+    <h2 id="titulo-principal" class="animar">👥 Quem Somos</h2>
+    <p id="texto-principal" class="animar">
+      Somos uma equipe apaixonada por transformar vidas por meio da <strong>educação financeira</strong>. Acreditamos que o conhecimento empodera e pode tirar pessoas do ciclo da dívida, oferecendo novas possibilidades para o futuro.
+    </p>
+    <div class="carrossel" id="carrossel">
+      <div class="slides" id="slides">
+        <img src="assets/img/carrossel1.png" alt="Equipe de educadores financeiros">
+        <img src="assets/img/carrossel2.png" alt="Oficinas de educação financeira">
+        <img src="assets/img/carrossel3.png" alt="Símbolo de crescimento e esperança">
+      </div>
+    </div>
+    <div class="botoes" id="botoes">
+      <button onclick="mudarSlide(0)" class="ativo" aria-label="Slide 1"></button>
+      <button onclick="mudarSlide(1)" aria-label="Slide 2"></button>
+      <button onclick="mudarSlide(2)" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <footer class="footer-site">
+    <div class="footer-conteudo">
+        <div class="footer-colunas">
+
+            <div class="footer-coluna">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Sobre</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-coluna">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="mailto:contato@financasquesalvam.org">contato@financasquesalvam.org</a></li>
+                    <li>Porto Alegre - RS</li>
+                </ul>
+            </div>
+
+            <div class="footer-coluna">
+                <h4>Redes Sociais</h4>
+                <div class="redes-sociais">
+                    <a href="#" class="link-rede"><img src="assets/img/linkedin.png" alt="LinkedIn"></a>
+                    <a href="#" class="link-rede"><img src="assets/img/youtube.png" alt="YouTube"></a>
+                    <a href="#" class="link-rede"><img src="assets/img/facebook.png" alt="Facebook"></a>
+                    <a href="#" class="link-rede"><img src="assets/img/instagram.jpg" alt="Instagram"></a>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="direitos">
+            © 2025 <strong>Finanças que Salvam</strong>. Todos os direitos reservados.
+        </p>
+    </div>
+</footer>
+
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav-links");
+    const actions = document.querySelector(".acoes-header");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+      actions.classList.toggle("active");
+    });
+
+    // Fecha o menu se clicar fora dele
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.header')) {
+        nav.classList.remove('active');
+        actions.classList.remove('active');
+      }
+    });
+
+    // Carrossel
+    const slides = document.getElementById('slides');
+    const botoes = document.querySelectorAll('.botoes button');
+    const tituloPrincipal = document.getElementById('titulo-principal');
+    const textoPrincipal = document.getElementById('texto-principal');
+
+    const legendasTopo = [
+      {
+        titulo: '👥 Quem Somos',
+        texto: 'Somos uma equipe apaixonada por transformar vidas por meio da <strong>educação financeira</strong>. Acreditamos que o conhecimento empodera e pode tirar pessoas do ciclo da dívida, oferecendo novas possibilidades para o futuro.'
+      },
+      {
+        titulo: '💼 O que Fazemos',
+        texto: 'Oferecemos oficinas, conteúdos educativos e consultorias para capacitar pessoas em situação de vulnerabilidade.'
+      },
+      {
+        titulo: '🌱 Nossas Intenções',
+        texto: 'Construir uma rede de apoio que promova estabilidade e independência financeira para famílias e comunidades.'
+      }
+    ];
+
+    let slideAtual = 0;
+
+    function animarElemento(el) {
+      el.classList.remove('animar');
+      void el.offsetWidth;
+      el.classList.add('animar');
+    }
+
+    function mudarSlide(index) {
+      slideAtual = index;
+      slides.style.transform = `translateX(-${index * (100 / legendasTopo.length)}%)`;
+      botoes.forEach(btn => btn.classList.remove('ativo'));
+      botoes[index].classList.add('ativo');
+
+      tituloPrincipal.textContent = legendasTopo[index].titulo;
+      textoPrincipal.innerHTML = legendasTopo[index].texto;
+
+      animarElemento(tituloPrincipal);
+      animarElemento(textoPrincipal);
+    }
+
+    setInterval(() => {
+      slideAtual = (slideAtual + 1) % legendasTopo.length;
+      mudarSlide(slideAtual);
+    }, 10000);
+  </script>
+</body>
+
+</html>
