@@ -1,6 +1,6 @@
 <?php
 session_start();
-include './includes/Connection.php';
+include '../../includes/Connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
@@ -141,12 +141,12 @@ try {
   <title>Editar Perfil - Finanças que Salvam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/header.css">
-  <link rel="stylesheet" href="assets/css/forms.css">
-  <link rel="stylesheet" href="assets/css/buttons.css">
-  <link rel="stylesheet" href="assets/css/alerts.css">
-  <link rel="stylesheet" href="assets/css/utilities.css">
-  <link rel="stylesheet" href="assets/css/editar_usuario.css">
+  <link rel="stylesheet" href="../../assets/css/header.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+  <link rel="stylesheet" href="../../assets/css/buttons.css">
+  <link rel="stylesheet" href="../../assets/css/alerts.css">
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
+  <link rel="stylesheet" href="../../assets/css/editar_usuario.css">
 </head>
 
 <body>
@@ -156,13 +156,13 @@ try {
       <h1>Finanças que Salvam</h1>
       <div class="acoes-header">
         <span>Olá, <?php echo htmlspecialchars($usuario['nome']); ?>!</span>
-        <a href="logout.php" class="link-entrar">Sair</a>
+        <a href="../../scripts/logout.php" class="link-entrar">Sair</a>
       </div>
     </div>
   </header>
 
   <div class="editar-container">
-    <a href="dashboard.php" class="voltar-link">
+    <a href="../dashboard.php" class="voltar-link">
       <i class="fas fa-arrow-left"></i>
       Voltar ao Dashboard
     </a>
@@ -233,7 +233,7 @@ try {
             <i class="fas fa-save"></i>
             Salvar Alterações
           </button>
-          <a href="dashboard.php" class="btn btn-secondary">
+          <a href="../dashboard.php" class="btn btn-secondary">
             <i class="fas fa-times"></i>
             Cancelar
           </a>

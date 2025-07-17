@@ -7,19 +7,19 @@
   <title>Cadastrar - Finanças que Salvam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/forms.css">
-  <link rel="stylesheet" href="assets/css/buttons.css">
-  <link rel="stylesheet" href="assets/css/alerts.css">
-  <link rel="stylesheet" href="assets/css/utilities.css">
-  <link rel="stylesheet" href="assets/css/cadastrar.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+  <link rel="stylesheet" href="../../assets/css/buttons.css">
+  <link rel="stylesheet" href="../../assets/css/alerts.css">
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
+  <link rel="stylesheet" href="../../assets/css/cadastrar.css">
   <script src="https://kit.fontawesome.com/a2d9d3f09f.js" crossorigin="anonymous"></script>
   <?php
-  include './includes/Connection.php';
+  include '../../includes/Connection.php';
   ?>
 </head>
 
 <body>
-  <a href="index.php" class="voltar-link">
+  <a href="../../index.php" class="voltar-link">
     <i class="fas fa-arrow-left"></i>
     Voltar ao Início
   </a>
@@ -62,7 +62,7 @@
       }
       ?>
 
-      <form action="Signin.php" method="POST" id="cadastroForm">
+      <form action="../../scripts/Insert/Signin.php" method="POST" id="cadastroForm">
         <div class="form-group">
           <label for="nome">Nome Completo</label>
           <div class="input-icon">
@@ -136,14 +136,14 @@
 
       <div class="cadastro-footer">
         <p>Já tem uma conta?</p>
-        <a href="login.php" class="btn-login">
+        <a href="../Usuarios/login.php" class="btn-login">
           <i class="fas fa-sign-in-alt"></i>
           Fazer Login
         </a>
       </div>
     </div>
   </div>
-  <script src="assets/js/cadastrar.js" defer></script>
+  <script src="../../assets/js/cadastrar.js" defer></script>
 </body>
 
 </html>

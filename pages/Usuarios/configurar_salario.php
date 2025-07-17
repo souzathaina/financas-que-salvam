@@ -1,10 +1,10 @@
 <?php
 session_start();
-include './includes/Connection.php';
+include '../../includes/Connection.php';
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ./index.php?sucesso=0&erro=nao_logado");
+    header("Location: ../../index.php?sucesso=0&erro=nao_logado");
     exit();
 }
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':usuario_id' => $usuario_id
             ]);
             
-            header("Location: ./dashboard.php?sucesso=1&msg=salario_atualizado");
+            header("Location: ../dashboard.php?sucesso=1&msg=salario_atualizado");
             exit();
         } catch (PDOException $e) {
             error_log("Erro ao atualizar salário: " . $e->getMessage());
@@ -55,16 +55,16 @@ try {
   <title>Configurar Salário - Finanças que Salvam</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/forms.css">
-  <link rel="stylesheet" href="assets/css/buttons.css">
-  <link rel="stylesheet" href="assets/css/alerts.css">
-  <link rel="stylesheet" href="assets/css/utilities.css">
-  <link rel="stylesheet" href="assets/css/configurar_salario.css">
+  <link rel="stylesheet" href="../../assets/css/forms.css">
+  <link rel="stylesheet" href="../../assets/css/buttons.css">
+  <link rel="stylesheet" href="../../assets/css/alerts.css">
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
+  <link rel="stylesheet" href="../../assets/css/configurar_salario.css">
 </head>
 
 <body>
   <!-- HEADER -->
-<a href="dashboard.php" class="voltar-link">
+<a href="../dashboard.php" class="voltar-link">
     <i class="fas fa-arrow-left"></i>
     Voltar ao Dashboard
   </a>
@@ -98,7 +98,7 @@ try {
       </div>
       
       <div class="btn-container">
-        <a href="dashboard.php" class="btn-cancelar">
+        <a href="../dashboard.php" class="btn-cancelar">
           <i class="fas fa-times"></i> Cancelar
         </a>
         <button type="submit" class="btn-verde">

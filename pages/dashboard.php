@@ -1,7 +1,7 @@
 <?php
 session_start();
-include './includes/Connection.php';
-include './includes/usuarioDashboard.php';
+include '../includes/Connection.php';
+include '../includes/usuarioDashboard.php';
 
 try {
     $sqlDespesas = '
@@ -113,13 +113,13 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Finanças que Salvam</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/dashboard.css">
-    <link rel="stylesheet" href="assets/css/tables.css">
-    <link rel="stylesheet" href="assets/css/charts.css">
-    <link rel="stylesheet" href="assets/css/buttons.css">
-    <link rel="stylesheet" href="assets/css/alerts.css">
-    <link rel="stylesheet" href="assets/css/utilities.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/charts.css">
+    <link rel="stylesheet" href="../assets/css/buttons.css">
+    <link rel="stylesheet" href="../assets/css/alerts.css">
+    <link rel="stylesheet" href="../assets/css/utilities.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -132,7 +132,7 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
             <h1>Finanças que Salvam</h1>
             <div class="acoes-header">
                 <span>Olá, <?php echo htmlspecialchars($usuario['nome']); ?>!</span>
-                <a href="logout.php" class="link-entrar">Sair</a>
+                <a href="../scripts/logout.php" class="link-entrar">Sair</a>
             </div>
         </div>
     </header>
@@ -167,19 +167,19 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
 
         <!-- AÇÕES RÁPIDAS -->
         <section class="acoes-dashboard">
-            <a href="cadastrar_despesas.php" class="btn-dashboard verde">
+            <a href="./Despesas/cadastrar_despesas.php" class="btn-dashboard verde">
                 <i class="fas fa-plus"></i>
                 Nova Despesa
             </a>
-            <a href="cadastrar_categoria.php" class="btn-dashboard">
+            <a href="./Categorias/cadastrar_categoria.php" class="btn-dashboard">
                 <i class="fas fa-tags"></i>
                 Nova Categoria
             </a>
-            <a href="configurar_salario.php" class="btn-dashboard">
+            <a href="./Usuarios/configurar_salario.php" class="btn-dashboard">
                 <i class="fas fa-cog"></i>
                 Configurar Salário
             </a>
-            <a href="editar_usuario.php" class="btn-dashboard">
+            <a href="./Usuarios/editar_usuario.php" class="btn-dashboard">
                 <i class="fas fa-user-edit"></i>
                 Editar Perfil
             </a>
@@ -298,7 +298,7 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
                     <i class="fas fa-receipt" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
                     <h3 style="color: #666; margin-bottom: 10px;">Nenhuma despesa registrada</h3>
                     <p style="color: #999;">Comece registrando sua primeira despesa!</p>
-                    <a href="cadastrar_despesas.php" class="btn-verde" style="margin-top: 20px;">Cadastrar Primeira
+                    <a href="./Despesas/cadastrar_despesas.php" class="btn-verde" style="margin-top: 20px;">Cadastrar Primeira
                         Despesa</a>
                 </div>
             <?php else: ?>
@@ -325,7 +325,7 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="btn-excluir" onclick="deletarDespesa(<?php echo $despesa['id']; ?>)">
-                                            <i class="fas fa-trash-alt"></i>
+                                            <i class="fas fa-trash-alt"><?php echo $despesa['id']; ?></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -345,9 +345,9 @@ if ($valorCategoriaMaisGasta > $salario / 2) {
             data: <?php echo json_encode(array_map('floatval', array_column($categorias, 'total_categoria'))); ?>
         };
     </script>
-    <script src="assets/js/graficos.js"></script>
-    <script src="assets/js/graficoPesquisa.js" defer></script>
-    <script src="assets/js/dashboard.js" defer></script>
+    <script src="../assets/js/graficos.js"></script>
+    <script src="../assets/js/graficoPesquisa.js" defer></script>
+    <script src="../assets/js/dashboard.js" defer></script>
 </body>
 
 </html>

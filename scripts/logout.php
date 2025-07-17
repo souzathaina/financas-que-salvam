@@ -17,6 +17,5 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Redireciona para a página inicial
-header("Location: index.php?msg=logout_sucesso");
+header("Location: ../index.php?msg=logout_sucesso");
 exit();
-?> 

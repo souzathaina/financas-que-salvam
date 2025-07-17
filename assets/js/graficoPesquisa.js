@@ -3,11 +3,11 @@ let chartPesquisa = null;
 
 async function buscarDadosGrafico(formData) {
   const params = new URLSearchParams(formData).toString();
-  const response = await fetch('dadosGrafico.php?' + params);
+  const response = await fetch('../scripts/Select/dadosGrafico.php?' + params);
   if (!response.ok) throw new Error('Erro ao buscar dados do gráfico');
   return await response.json();
 }
-
+ 
 function atualizarGraficoPesquisa(dados) {
   const ctx = document.getElementById('chartPesquisa').getContext('2d');
   if (chartPesquisa) chartPesquisa.destroy();

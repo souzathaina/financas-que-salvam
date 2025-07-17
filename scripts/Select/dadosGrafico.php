@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-include './includes/Connection.php';
+include '../../includes/Connection.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     echo json_encode(['salario' => 0, 'gasto' => 0]);
