@@ -135,7 +135,7 @@ try {
           <div class="form-group">
             <label for="valor">Valor (R$) *</label>
             <input 
-              type="number" 
+              type="text" 
               id="valor" 
               name="valor" 
               step="0.01" 

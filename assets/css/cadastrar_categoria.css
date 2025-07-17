@@ -21,7 +21,7 @@ html, body {
     text-align: center;
     border: 1.5px solid #e3eaf3;
     transition: box-shadow 0.2s;
-    margin: 50px auto;
+    margin: 50px auto; 
   }
   .categoria-card:hover {
     box-shadow: 0 12px 36px rgba(30,144,255,0.13), 0 2px 12px rgba(30,144,255,0.09);
@@ -169,6 +169,54 @@ html, body {
     margin-bottom: 15px;
     font-size: 1.1rem;
   }
+
+/* Estilo do grupo de botões */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Estilo do botão de editar */
+.btn-editar {
+  background-color: #4CAF50; /* Cor verde */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn-editar:hover {
+  background-color: #45a049;
+}
+
+/* Estilo do botão de excluir */
+.btn-excluir {
+  background-color: #e74c3c; /* Cor vermelha */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s;
+}
+
+.btn-excluir:hover {
+  background-color: #c0392b;
+}
+
+
   @media (max-width: 900px) {
     .categoria-card {
       padding: 30px 12px;
